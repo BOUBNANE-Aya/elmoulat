@@ -18,7 +18,7 @@ use App\Http\Controllers\Auth\LoginController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::middleware(['middleware'=>'PreventBack'])->group(function () {
@@ -26,8 +26,6 @@ Route::middleware(['middleware'=>'PreventBack'])->group(function () {
 });
 
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth','PreventBack']], function(){
     Route::get('dashboard',[AdminController::class,'index'])->name('admin.dashboard');
