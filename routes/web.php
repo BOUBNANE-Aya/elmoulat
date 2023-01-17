@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\Auth\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,18 +21,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Route::middleware(['middleware'=>'PreventBack'])->group(function () {
+    Auth::routes();
+});
+
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::group(['prefex'=>'admin','middleware'=>'auth'],function(){
-
-    Route::get('/dashboard',[AdminController::class,'index'])->name('dashboard');
-
+Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth','PreventBack']], function(){
+    Route::get('dashboard',[AdminController::class,'index'])->name('admin.dashboard');
+   
+   
 });
 
-Route::group(['prefex'=>'user','middleware'=>'auth'],function(){
-
-    Route::get('/dashboard',[AdminController::class,'index'])->name('dashboard');
+Route::group(['prefix'=>'user', 'middleware'=>['isUser','auth','PreventBack']], function(){
+Route::get('dashboard',[UserController::class,'index'])->name('user.dashboard');
 
 });
