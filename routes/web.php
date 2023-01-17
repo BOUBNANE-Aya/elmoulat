@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\LoginController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,11 +30,11 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth','PreventBack']], function(){
     Route::get('dashboard',[AdminController::class,'index'])->name('admin.dashboard');
-   
-   
+    Route::get('dashboard/projects',[AdminController::class,'projects'])->name('admin.projects');
+    
 });
 
 Route::group(['prefix'=>'user', 'middleware'=>['isUser','auth','PreventBack']], function(){
-Route::get('dashboard',[UserController::class,'index'])->name('user.dashboard');
 
+Route::get('dashboard',[UserController::class,'index'])->name('user.dashboard');
 });

@@ -50,6 +50,7 @@
     <!-- endinject -->
 
     <link rel="icon" type="image/png" sizes="16x16" href="img/favicon.png">
+     
 </head>
 
 <body class="layout-light side-menu overlayScroll">
@@ -1091,36 +1092,24 @@
                         <li class="menu-title">
                             <span>Main menu</span>
                         </li>
-                        <li class="has-child open">
-                            <a href="#" class="active">
-                                <span data-feather="home" class="nav-icon"></span>
-                                <span class="menu-text">Dashboard</span>
-                                <span class="toggle-icon"></span>
+                        
+                          <li>
+                            <a  href="{{route('admin.projects')}}" id="projet">
+                                <span data-feather="layers" class="nav-icon"></span>
+                                <span class="menu-text">Projet</span>
                             </a>
-                            <ul>
-                                <li>
-                                    <a class="active" href="index.html">Social Media</a>
-                                </li>
-                                <li>
-                                    <a class="" href="business.html">FineTech /
-                                        Business</a>
-                                </li>
-                                <li>
-                                    <a class="" href="performance.html">Site
-                                        Performance</a>
-                                </li>
-                                <li>
-                                    <a class="" href="ecommerce.html">Ecommerce</a>
-                                </li>
-                                <li>
-                                    <a class="" href="crm.html">
-                                        CRM</a>
-                                </li>
-                                <li>
-                                    <a class="" href="sales.html">
-                                        Sales Performance</a>
-                                </li>
-                            </ul>
+                        </li>
+                        <li>
+                            <a href="" class="">
+                                <span data-feather="folder" class="nav-icon"></span>
+                                <span class="menu-text">Fournisseurs</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="" class="">
+                                <span data-feather="file" class="nav-icon"></span>
+                                <span class="menu-text">Ouvriers</span>
+                            </a>
                         </li>
                         <li class="has-child">
                             <a href="#" class="">
@@ -1823,8 +1812,10 @@
                 </div>
             </div>
         </aside>
-
+       
        @yield('dashboard')
+       @yield('projects')
+       
         <footer class="footer-wrapper">
             <div class="container-fluid">
                 <div class="row">
@@ -1913,6 +1904,7 @@
     <script src="{{asset('assets/theme_assets/js/jvectormap-init.js')}}"></script>
     <script src="{{asset('assets/theme_assets/js/leaflet-init.js')}}"></script>
     <script src="{{asset('assets/theme_assets/js/main.js')}}"></script>
+    
     <!-- endinject-->
 </body>
 
