@@ -50,7 +50,7 @@
     <!-- endinject -->
 
     <link rel="icon" type="image/png" sizes="16x16" href="img/favicon.png">
-     
+     @livewireStyles
 </head>
 
 <body class="layout-light side-menu overlayScroll">
@@ -1814,7 +1814,7 @@
         </aside>
        
        @yield('dashboard')
-       @yield('projects')
+        <livewire:projects-list /> 
        
         <footer class="footer-wrapper">
             <div class="container-fluid">
@@ -1903,8 +1903,10 @@
     <script src="{{asset('assets/theme_assets/js/icon-loader.js')}}"></script>
     <script src="{{asset('assets/theme_assets/js/jvectormap-init.js')}}"></script>
     <script src="{{asset('assets/theme_assets/js/leaflet-init.js')}}"></script>
+    <script src="https://kit.fontawesome.com/1a35748197.js" crossorigin="anonymous"></script>
     <script src="{{asset('assets/theme_assets/js/main.js')}}"></script>
-    
+    @stack('scripts')
+    @livewireScripts
     <!-- endinject-->
 </body>
 
