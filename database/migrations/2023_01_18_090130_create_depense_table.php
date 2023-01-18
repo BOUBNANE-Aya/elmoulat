@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateReleverBancaireTable extends Migration
+class CreateDepenseTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,15 @@ class CreateReleverBancaireTable extends Migration
      */
     public function up()
     {
-        Schema::create('_relever_bancaire', function (Blueprint $table) {
+        Schema::create('depense', function (Blueprint $table) {
             $table->id();
-            $table->foreign('id_bank')->references('id')->on('Bank');
-            $table->foreign('id_cheque')->references('id')->on('Cheque');
+           
+            $table->unsignedBigInteger('Reglement_id');
+            $table->foreign('Reglement_id')->references('id')->on('Reglement'); 
+            $table->integer('numero');
             $table->date('date');
-            $table->string('operation_ref');
-            $table->float('debit');
+            $table->string('methode');
+            $table->float('montant');
             $table->timestamps();
         });
     }
@@ -31,6 +33,6 @@ class CreateReleverBancaireTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('_relever_bancaire');
+        Schema::dropIfExists('depense');
     }
 }

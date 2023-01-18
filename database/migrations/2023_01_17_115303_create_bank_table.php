@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOuvriersTable extends Migration
+class CreateBankTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,14 @@ class CreateOuvriersTable extends Migration
      */
     public function up()
     {
-        Schema::create('_ouvriers', function (Blueprint $table) {
+        Schema::create('bank', function (Blueprint $table) {
+            //
             $table->id();
             $table->string('nom');
-            $table->date('dateNais');
-            $table->string('cin')->unique();
-            $table->string('N_CIN')->;
-            $table->date('date-dube');
-            $table->string('observation');
-            $table->integer('notation');
+            $table->string('email');
+            $table->integer('phone');
+            $table->string('adress');
+            $table->string('ville');
             $table->timestamps();
         });
     }
@@ -33,6 +32,8 @@ class CreateOuvriersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('_ouvriers');
+        Schema::table('bank', function (Blueprint $table) {
+            //
+        });
     }
 }

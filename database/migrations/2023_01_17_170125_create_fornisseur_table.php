@@ -13,9 +13,14 @@ class CreateFornisseurTable extends Migration
      */
     public function up()
     {
-        Schema::create('_fornisseur', function (Blueprint $table) {
+        Schema::create('fornisseur', function (Blueprint $table) {
             $table->id();
-            $table->foreign('id_domaine')->references('id')->on('fdomaine');
+            $table->unsignedBigInteger('fdomaine_id');
+            $table-> string('nom');
+            $table-> integer('ice');
+            $table-> integer('phone');
+            $table-> string('email');
+            $table->foreign('fdomaine_id')->references('id')->on('fdomaine');  
             $table->timestamps();
         });
     }
@@ -26,6 +31,6 @@ class CreateFornisseurTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('_fornisseur');
+        Schema::dropIfExists('fornisseur');
     }
 }

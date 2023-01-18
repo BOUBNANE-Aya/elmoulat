@@ -13,15 +13,16 @@ class CreateVenteTable extends Migration
      */
     public function up()
     {
-        Schema::create('_vente', function (Blueprint $table) {
+        Schema::create('vente', function (Blueprint $table) {
             $table->id();
-            $table->foreign('id_projet')->references('id')->on('Project');
-            $table->foreign('id_client')->references('id')->on('Client');
+            $table->unsignedBigInteger('project_id');          
+            $table->unsignedBigInteger('client_id');    
             $table->string('titre');
             $table->float('montant');
             $table->float('montantReal');
             $table->string('contart');
-
+            $table->foreign('project_id')->references('id')->on('projet');
+            $table->foreign('client_id')->references('id')->on('client');
             $table->timestamps();
         });
     }
@@ -33,6 +34,6 @@ class CreateVenteTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('_vente');
+        Schema::dropIfExists('vente');
     }
 }

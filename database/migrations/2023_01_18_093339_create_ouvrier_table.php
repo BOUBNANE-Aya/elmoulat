@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateReglementTable extends Migration
+class CreateOuvrierTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,15 @@ class CreateReglementTable extends Migration
      */
     public function up()
     {
-        Schema::create('_reglement', function (Blueprint $table) {
+        Schema::create('ouvrier', function (Blueprint $table) {
             $table->id();
-            $table->foreign('id_cheque')->references('id')->on('Cheque');
-            $table->date('date');
-            $table->string('methode');
-            $table->float('montant');
+            $table->string('nom');
+            $table->date('dateNais');
+            $table->string('cin')->unique();
+            $table->string('N_CIN');
+            $table->date('date-dube');
+            $table->string('observation');
+            $table->integer('notation');
             $table->timestamps();
         });
     }
@@ -30,6 +33,6 @@ class CreateReglementTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('_reglement');
+        Schema::dropIfExists('ouvrier');
     }
 }

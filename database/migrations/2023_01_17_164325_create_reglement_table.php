@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBankTable extends Migration
+class CreateReglementTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateBankTable extends Migration
      */
     public function up()
     {
-        Schema::create('_bank', function (Blueprint $table) {
+        Schema::create('reglement', function (Blueprint $table) {
             $table->id();
-            $table->string('nom');
-            $table->string('email');
-            $table->int('phone');
-            $table->integer('adress');
-            $table->string('ville');
+            $table->unsignedBigInteger('cheque_id');
+            $table->date('date');
+            $table->string('methode');
+            $table->float('montant');
+            $table->foreign('cheque_id')->references('id')->on('cheque');
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ class CreateBankTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('_bank');
+        Schema::dropIfExists('reglement');
     }
 }

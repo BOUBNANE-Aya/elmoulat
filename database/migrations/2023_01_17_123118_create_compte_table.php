@@ -13,9 +13,11 @@ class CreateCompteTable extends Migration
      */
     public function up()
     {
-        Schema::create('_compte', function (Blueprint $table) {
+        Schema::create('compte', function (Blueprint $table) {
+            //
             $table->id();
-            $table->foreign('id_bank')->references('id')->on('Bank');
+            $table->unsignedBigInteger('bank_id');
+            $table->foreign('bank_id')->references('id')->on('bank');
             $table->integer('numero');
             $table->date('date_creation');
             $table->timestamps();
@@ -29,6 +31,8 @@ class CreateCompteTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('_compte');
+        Schema::table('compte', function (Blueprint $table) {
+            //
+        });
     }
 }
