@@ -1,5 +1,4 @@
-@extends('layouts.app')
-@section('fournisseurs')
+<div>
 
 <div class="contents">
  <div class="container-fluid">
@@ -340,4 +339,3 @@
     
 @endpush
 
-@endsection

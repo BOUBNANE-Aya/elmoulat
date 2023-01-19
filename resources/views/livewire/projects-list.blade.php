@@ -1,5 +1,4 @@
-@extends('layouts.app')
-@section('projects')
+
 <div class="contents">
  <div class="container-fluid">
  
@@ -338,5 +337,3 @@
  </script>
     
 @endpush
-
-@endsection
