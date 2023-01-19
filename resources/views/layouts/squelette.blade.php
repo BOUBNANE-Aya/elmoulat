@@ -44,7 +44,8 @@
     <link rel="stylesheet" href="{{asset('assets/vendor_assets/css/trumbowyg.min.css')}}">
 
     <link rel="stylesheet" href="{{asset('assets/vendor_assets/css/wickedpicker.min.css')}}">
-
+    
+    <script src="sweetalert2.all.min.js"></script>
     <link rel="stylesheet" href="{{asset("style.css")}}">
 
     <!-- endinject -->
@@ -1818,7 +1819,6 @@
        @yield('projects')
        
        
-       
         <footer class="footer-wrapper">
             <div class="container-fluid">
                 <div class="row">
@@ -1859,8 +1859,7 @@
         </span>
     </div>
     <div class="overlay-dark-sidebar"></div>
-
-    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDduF2tLXicDEPDMAtC6-NLOekX0A5vlnY"></script>
+   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- inject:js-->
     <script src="{{asset('assets/vendor_assets/js/jquery/jquery-3.5.1.min.js')}}"></script>
     <script src="{{asset('assets/vendor_assets/js/jquery/jquery-ui.js')}}"></script>
