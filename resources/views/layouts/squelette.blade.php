@@ -1100,7 +1100,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="" class="">
+                            <a href="{{route('admin.fournisseurs')}}" class="">
                                 <span data-feather="folder" class="nav-icon"></span>
                                 <span class="menu-text">Fournisseurs</span>
                             </a>
@@ -1814,7 +1814,9 @@
         </aside>
        
        @yield('dashboard')
+       @yield('fournisseurs')
         <livewire:projects-list /> 
+       
        
         <footer class="footer-wrapper">
             <div class="container-fluid">

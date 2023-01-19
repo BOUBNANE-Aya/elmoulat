@@ -14,4 +14,8 @@ class AdminController extends Controller
     public function projects(){
         return view('admin.projects');
     }
+
+    public function fournisseurs(){
+        return view('admin.fournisseurs');
+    }
 }
