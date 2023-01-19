@@ -1,4 +1,5 @@
-<div>
+@extends('layouts.app')
+@section('projects')
 <div class="contents">
  <div class="container-fluid">
  
@@ -322,7 +323,7 @@
             </div>
             <!-- ends: .modal-info-Delete -->
 
-</div>
+
 
 @push('scripts')
  <script>
@@ -337,3 +338,5 @@
  </script>
     
 @endpush
+
+@endsection

@@ -83,6 +83,6 @@ public function resetInputs(){
     public function render()
     {
         $projets = Projet::orderBy('id', 'DESC')->get();
-        return view('livewire.projects-list',['projets'=>$projets])->layout('layouts.squelette.blade.php');
+        return view('livewire.projects-list',['projets'=>$projets]);
     }
 }

@@ -1815,7 +1815,8 @@
        
        @yield('dashboard')
        @yield('fournisseurs')
-        <livewire:projects-list /> 
+       @yield('projects')
+       
        
        
         <footer class="footer-wrapper">
