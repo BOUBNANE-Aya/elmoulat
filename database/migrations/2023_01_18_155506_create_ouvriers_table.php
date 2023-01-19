@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOuvriesTable extends Migration
+class CreateOuvriersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateOuvriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('ouvries', function (Blueprint $table) {
+        Schema::create('ouvriers', function (Blueprint $table) {
             $table->id();
             $table->string('nom');
             $table->date('dateNais');
@@ -34,6 +34,6 @@ class CreateOuvriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ouvries');
+        Schema::dropIfExists('ouvriers');
     }
 }

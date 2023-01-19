@@ -20,7 +20,7 @@ class CreateChargesTable extends Migration
             $table->unsignedBigInteger('projet_id');
             $table->foreign('projet_id')->references('id')->on('projets'); 
             $table->unsignedBigInteger('ouvrier_id');
-            $table->foreign('ouvrier_id')->references('id')->on('ouvries'); 
+            $table->foreign('ouvrier_id')->references('id')->on('ouvriers'); 
             $table->unsignedBigInteger('Reglement_id');
             $table->foreign('Reglement_id')->references('id')->on('Reglements'); 
             $table->unsignedBigInteger('facture_id');
