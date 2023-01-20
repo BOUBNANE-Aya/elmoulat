@@ -21,9 +21,13 @@ class ProjetsImport implements ToModel,WithHeadingRow
     */
     public function model(array $row)
     {
+<<<<<<< HEAD
 
      
         $spreadsheet = IOFactory::load(Session::get('exelFile'));
+=======
+        $spreadsheet = IOFactory::load($path);
+>>>>>>> 95c5db728ab8d09e0010ecd8d660fd64f7b22d36
         $i = 0;
         foreach ($spreadsheet->getActiveSheet()->getDrawingCollection() as $drawing) {
             if ($drawing instanceof MemoryDrawing) {

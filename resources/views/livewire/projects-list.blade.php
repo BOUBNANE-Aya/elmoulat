@@ -330,7 +330,7 @@
                 <div class="modal-body">
                     <div class="row">
 
-                        <form wire:submit.prevent='saveData'>
+                        <form wire:submit.prevent='saveData' enctype="multipart/form-data">
                             <div class="form-basic">
                                 <div class="form-group mb-25">
                                     <label>Nom de projet</label>
