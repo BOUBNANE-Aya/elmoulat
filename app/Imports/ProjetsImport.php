@@ -5,15 +5,20 @@ namespace App\Imports;
 use App\Models\Projet;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Worksheet\MemoryDrawing;
 use Illuminate\Support\Facades\Session;
-
+use Carbon\Carbon;
 
 
 class ProjetsImport implements ToModel,WithHeadingRow
 {
-    
+    protected $path;
+        public function __construct($path){
+            $this->path =$path;
+
+        }
     /**
     * @param array $row
     *
@@ -21,13 +26,11 @@ class ProjetsImport implements ToModel,WithHeadingRow
     */
     public function model(array $row)
     {
-<<<<<<< HEAD
-
+        
      
-        $spreadsheet = IOFactory::load(Session::get('exelFile'));
-=======
-        $spreadsheet = IOFactory::load($path);
->>>>>>> 95c5db728ab8d09e0010ecd8d660fd64f7b22d36
+        $spreadsheet = IOFactory::load(storage_path('app/'.$this->path));
+   
+     
         $i = 0;
         foreach ($spreadsheet->getActiveSheet()->getDrawingCollection() as $drawing) {
             if ($drawing instanceof MemoryDrawing) {
@@ -60,20 +63,23 @@ class ProjetsImport implements ToModel,WithHeadingRow
             }
 
             $myFileName = time() .++$i. '.' . $extension;
+            $validatedData= $this->image->storeAs('images/projets', $myFileName, 'public');
             file_put_contents('images/projets/' . $myFileName, $imageContents);
 
         }
+        
+        
         return new Projet([
-            'name'     => $row[0],
+            'name'     => $row['name'],
             'image'    => $myFileName, 
-            'consistance'    => $row[2], 
-            'titre_finance'    => $row[3], 
-            'superfice'    => $row[4], 
-            'adress'    => $row[5], 
-            'ville'    => $row[6], 
-            'autorisation'    => $row[7], 
-            'datedebut'    => $row[8], 
-            'datefin'    => $row[9], 
+            'consistance'    => $row['consistance'], 
+            'titre_finance'    => $row['titre_finance'], 
+            'superfice'    => $row['superfice'], 
+            'adress'    => $row['adress'], 
+            'ville'    => $row['ville'], 
+            'autorisation'    => $row['autorisation'], 
+            'datedebut'    =>  Carbon::parse($row['datedebut' ])->format('Y-m-d'), 
+            'datefin'    => Carbon::parse($row['datefin' ])->format('Y-m-d'), 
         ]);
     }
 }

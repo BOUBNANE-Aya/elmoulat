@@ -13,7 +13,7 @@ class ProjectsList extends Component
 
     public $name , $dated, $datef ,$autorisation , $superfice ,$image,$consistance ,$adress,$ville ,$titre_finance , $project_edit_id;
     public $exelFile;
-
+    protected $listeners = ['saveData' => 'saveData'];
 
 //   validation real -time
     public function updated($fields){
@@ -157,8 +157,9 @@ public function resetInputs(){
 
     
 
-        $path = $this->exelFile->store('files/projets', 'public');
-        Excel::import(new ProjetsImport, $path);
+        $path= $this->exelFile->store('','app');
+        // $path = file_get_contents($tt);
+        Excel::import(new ProjetsImport($path),$path);
         session()->flash('message','projet bien imposter');
         
      }

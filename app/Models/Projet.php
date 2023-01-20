@@ -18,6 +18,7 @@ class Projet extends Model
         'image',
         'consistance',
         'titre_finance',
+        'superfice',
         'adress',
         'ville',
         'autorisation',

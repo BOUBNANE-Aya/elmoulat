@@ -278,7 +278,7 @@
                         <div class="modal-info-icon warning">
                             <span data-feather="info"></span>
                         </div>
-                           <form wire:submit.prevent='importData' enctype="multipart/form-data">
+                           <form  enctype="multipart/form-data">
                                 <div class="form-group mb-25">
 
                                     <label>Importer des projets depuis un fichier xlxs</label>
@@ -296,7 +296,7 @@
 
                     <button type="button" class="btn btn-danger btn-outlined btn-sm"
                         data-dismiss="modal">Annuler</button>
-                    <button type="submit" class="btn btn-success btn-outlined btn-sm" >importer</button>
+                    <button type="submit" wire:click.prevent='importData' class="btn btn-success btn-outlined btn-sm" >importer</button>
 
                 </div>
                 </form>
@@ -330,7 +330,7 @@
                 <div class="modal-body">
                     <div class="row">
 
-                        <form wire:submit.prevent='saveData' enctype="multipart/form-data">
+                        <form enctype="multipart/form-data">
                             <div class="form-basic">
                                 <div class="form-group mb-25">
                                     <label>Nom de projet</label>
@@ -432,7 +432,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary btn-sm">Enregistrer projet</button>
+                    <button wire:click.prevent="saveData" class="btn btn-primary btn-sm">Enregistrer projet</button>
                 </div>
                 </form>
             </div>
@@ -603,21 +603,4 @@
 </div>
 </div>
 </div>
-@push('scripts')
-    <script>
-        window.addEventListener('close-model', event => {
-            $('#modal-basic').modal('hide');
-            $('#edit-modal').modal('hide');
-            $('#modal-info-delete').modal('hide');
-        });
 
-
-        window.addEventListener('add', event =>{
-             Swal.fire(
-                  'Super!',
-                  'Vous avez ajouter un nouveau projet!',
-                'success'
-)
-        });
-    </script>
-@endpush
