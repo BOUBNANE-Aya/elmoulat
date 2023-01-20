@@ -278,7 +278,7 @@
                         <div class="modal-info-icon warning">
                             <span data-feather="info"></span>
                         </div>
-                           <form wire:submit.prevent='importData'>
+                           <form wire:submit.prevent='importData' enctype="multipart/form-data">
                                 <div class="form-group mb-25">
 
                                     <label>Importer des projets depuis un fichier xlxs</label>

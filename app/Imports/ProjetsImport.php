@@ -7,9 +7,13 @@ use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Worksheet\MemoryDrawing;
+use Illuminate\Support\Facades\Session;
+
+
 
 class ProjetsImport implements ToModel,WithHeadingRow
 {
+    
     /**
     * @param array $row
     *
@@ -17,7 +21,9 @@ class ProjetsImport implements ToModel,WithHeadingRow
     */
     public function model(array $row)
     {
-        $spreadsheet = IOFactory::load(request()->file('exelFile'));
+
+     
+        $spreadsheet = IOFactory::load(Session::get('exelFile'));
         $i = 0;
         foreach ($spreadsheet->getActiveSheet()->getDrawingCollection() as $drawing) {
             if ($drawing instanceof MemoryDrawing) {

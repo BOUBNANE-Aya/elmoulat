@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Projet;
 use Livewire\WithFileUploads;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Session;
 
 class ProjectsList extends Component
 {
@@ -154,7 +155,7 @@ public function resetInputs(){
            
             'exelFile'=>'required|mimes:xlsx,xls',
         ]);
-        
+        Session::put('exelFile', $this->exelFile);
         Excel::import(new ProjetsImport, $this->exelFile);
         session()->flash('message','projet bien imposter');
         
