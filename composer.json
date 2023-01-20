@@ -14,6 +14,7 @@
         "laravel/ui": "^3.4",
         "livewire/livewire": "^2.11",
         "maatwebsite/excel": "^3.1",
+        "phpoffice/phpspreadsheet": "^1.26",
         "realrashid/sweet-alert": "^5.1"
     },
     "require-dev": {
