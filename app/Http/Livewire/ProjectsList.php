@@ -157,10 +157,13 @@ public function resetInputs(){
 
     
 
-        $path= $this->exelFile->store('','app');
+       
         // $path = file_get_contents($tt);
-        Excel::import(new ProjetsImport($path),$path);
-        session()->flash('message','projet bien imposter');
+        
+            $path= $this->exelFile->store('','app');
+            Excel::import(new ProjetsImport($this->exelFile,$path),$path);
+            session()->flash('message','projet bien imposter');
+        
         
      }
 //  import project end
