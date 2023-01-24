@@ -7,10 +7,6 @@ use Livewire\Component;
 class FournisseursList extends Component
 {
 
-   
-
-
-
 
 
     public function render()
