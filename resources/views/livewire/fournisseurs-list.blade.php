@@ -57,6 +57,7 @@
                     <div class="col-lg-12">
                         <div class="userDatatable orderDatatable shipped-dataTable global-shadow border p-30 bg-white radius-xl w-100 mb-30">
                             <div class="table-responsive">
+                                @if($fournisseurs->count() > 0)
                                 <table class="table mb-0 table-borderless border-0">
                                     <thead>
                                         <tr class="userDatatable-header">
@@ -67,17 +68,21 @@
 
                                                 </div>
                                             </th>
+                                           
                                             <th>
-                                                <span class="userDatatable-title">Nome de fournisseur</span>
+                                                <span class="userDatatable-title">Nom</span>
                                             </th>
                                             <th>
-                                                <span class="userDatatable-title">date de commencement</span>
+                                                <span class="userDatatable-title">ICE</span>
                                             </th>
                                             <th>
-                                                <span class="userDatatable-title">Status</span>
+                                                <span class="userDatatable-title">Phone</span>
                                             </th>
                                             <th>
-                                                <span class="userDatatable-title">Amount</span>
+                                                <span class="userDatatable-title">Email</span>
+                                            </th>
+                                            <th>
+                                                <span class="userDatatable-title">Adress</span>
                                             </th>
                                             <th>
                                                 <span class="userDatatable-title float-right">Actions</span>
@@ -86,9 +91,9 @@
                                     </thead>
                                     <tbody>
 
-                                          {{-- @if($projets->count() > 0)
+                                      
 
-                                          @foreach($projets as $projet)
+                                          @foreach($fournisseurs as $fournisseur)
                                             <tr>
                                             <td>
                                                 <div class="d-flex align-items-center">
@@ -106,41 +111,47 @@
                                                     
                                                 </div>
                                             </td>
+                                           
                                             <td>
                                                 <div class="orderDatatable-title">
-                                                    #02-0003
+                                                      {{$fournisseur->nom}}
                                                 </div>
                                             </td>
+                                            
                                             <td>
                                                 <div class="orderDatatable-title">
-                                                      {{$projet->name}}
+                                                     {{$fournisseur->ice}}
                                                 </div>
                                             </td>
-                                            <td>
-                                                <div class="orderDatatable-status d-inline-block">
-                                                    <span class="order-bg-opacity-success  text-success radius-xs active">shipped</span>
-                                                </div>
-                                            </td>
-                                            <td>
+                                             <td>
                                                 <div class="orderDatatable-title">
-                                                     {{$projet->date}}
+                                                     {{$fournisseur->phone}}
+                                                </div>
+                                            </td>
+                                             <td>
+                                                <div class="orderDatatable-title">
+                                                     {{$fournisseur->email}}
+                                                </div>
+                                            </td>
+                                             <td>
+                                                <div class="orderDatatable-title">
+                                                     {{$fournisseur->adress}}
                                                 </div>
                                             </td>
 
                                             <td>
                                                 <ul class="orderDatatable_actions mb-0 d-flex">
-                                                <li><a href="#" class="remove"><i class="fa-regular fa-eye"></i></a></li>
-                                                <li><a href="#" class="remove" data-toggle="modal" data-target="#edit-modal" wire:click='editProject({{$projet->id}})'><i class="fa-regular fa-pen-to-square"></i></a></li>            
-                                                <li><a href="#" class="remove" data-toggle="modal" data-target="#modal-info-delete" wire:click='deleteProject({{$projet->id}})' style="color: red;"><i class="fa-solid fa-trash"></i></a></li>  
+                            
+                                                <li><a  class="remove" data-toggle="modal" data-target="#edit-modal" wire:click='editProject({{$fournisseur->id}})'><i class="fa-regular fa-pen-to-square"></i></a></li>            
+                                                <li><a class="remove" data-toggle="modal" data-target="#modal-info-delete" wire:click='deleteProject({{$fournisseur->id}})' style="color: red;"><i class="fa-solid fa-trash"></i></a></li>  
                                                 
                                                 </ul>
                                             </td>
                                         </tr>
                                           @endforeach
-                                            @else
-                                          @endif
+                                           
                                         
-                                        <!-- End: tr --> --}}
+                                        <!-- End: tr -->
 
 
                                     
@@ -150,6 +161,10 @@
                                     
                                     </tbody>
                                 </table><!-- End: table -->
+                                 @else
+
+                                 <h1>no data </h1>
+                                          @endif
                             </div>
                             <div class="d-flex justify-content-sm-end justify-content-start mt-15 pt-25 border-top">
 

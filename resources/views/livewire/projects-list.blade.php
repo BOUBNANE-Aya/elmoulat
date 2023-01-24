@@ -211,6 +211,8 @@
                                             </td>
                                         </tr>
                                     @endforeach
+
+                                   
                                 @else
                                 @endif
 
@@ -226,33 +228,19 @@
                         </table><!-- End: table -->
                     </div>
                     <div class="d-flex justify-content-sm-end justify-content-start mt-15 pt-25 border-top">
-
+   
                         <nav class="atbd-page ">
                             <ul class="atbd-pagination d-flex">
                                 <li class="atbd-pagination__item">
-                                    <a href="#" class="atbd-pagination__link pagination-control"><span
-                                            class="la la-angle-left"></span></a>
-                                    <a href="#" class="atbd-pagination__link"><span
-                                            class="page-number">1</span></a>
-                                    <a href="#" class="atbd-pagination__link active"><span
-                                            class="page-number">2</span></a>
-                                    <a href="#" class="atbd-pagination__link"><span
-                                            class="page-number">3</span></a>
-                                    <a href="#" class="atbd-pagination__link pagination-control"><span
-                                            class="page-number">...</span></a>
-                                    <a href="#" class="atbd-pagination__link"><span
-                                            class="page-number">12</span></a>
-                                    <a href="#" class="atbd-pagination__link pagination-control"><span
-                                            class="la la-angle-right"></span></a>
-                                    <a href="#" class="atbd-pagination__option">
-                                    </a>
+                                      {{ $projets->links('vendor.livewire.bootstrap') }}
                                 </li>
                                 <li class="atbd-pagination__item">
                                     <div class="paging-option">
-                                        <select name="page-number" class="page-selection">
+                                        <select wire:model="pages" name="page-number" class="page-selection">
+                                            <option value="5">5/page</option>
+                                            <option value="10">10/page</option>
                                             <option value="20">20/page</option>
                                             <option value="40">40/page</option>
-                                            <option value="60">60/page</option>
                                         </select>
                                     </div>
                                 </li>

@@ -6,16 +6,19 @@ use Livewire\Component;
 use App\Models\Projet;
 use Livewire\WithFileUploads;
 use Maatwebsite\Excel\Facades\Excel;
+use Livewire\WithPagination;
 
 class ProjectsList extends Component
 {
     use WithFileUploads;
+    use WithPagination;
 
     public $name , $dated, $datef ,$autorisation , $superfice ,$image,$consistance ,$adress,$ville ,$titre_finance , $project_edit_id;
     public $exelFile;
     public $selectedProjects = [];
     public $selectAll = false;
     public $bulkDisabled = true;
+    public $pages = 5;
     protected $listeners = ['saveData' => 'saveData'];
 
 //   validation real -time
@@ -195,8 +198,9 @@ public function  deleteSelected(){
 
     public function render()
     {
+        
         $this->bulkDisabled = count($this->selectedProjects) < 1;
-        $projets = Projet::orderBy('id', 'DESC')->get();
+        $projets = Projet::orderBy('id', 'DESC')->paginate($this->pages);
         return view('livewire.projects-list',['projets'=>$projets]);
     }
 }

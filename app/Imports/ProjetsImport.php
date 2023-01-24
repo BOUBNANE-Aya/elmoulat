@@ -38,6 +38,7 @@ class ProjetsImport implements ToModel,WithHeadingRow
         $spreadsheet = IOFactory::load(storage_path('app/'.$this->path));
        
         $i = 0;
+        $j = 0;
         $currentImage = "";
 //  fetch images from exel file
 foreach ($spreadsheet->getActiveSheet()->getDrawingCollection() as  $drawing) {
@@ -74,38 +75,30 @@ foreach ($spreadsheet->getActiveSheet()->getDrawingCollection() as  $drawing) {
     
    
     $myFileName = time() .++$i. '.' . $extension;
-  
+   
     $imagesCollection[] =$myFileName;
    
-   
-   
-   Storage::disk('local')->put('public/images/projets/'.$myFileName,$imageContents);
-
-   
-   
+    Storage::disk('local')->put('public/images/projets/'.$myFileName,$imageContents);
 
    
 }
 
+   
+   
+     Projet::create([
+            'name'     => $row['name'],
+            'image'    => 'images/projets/'.$myFileName, 
+            'consistance'    => $row['consistance'], 
+            'titre_finance'    => $row['titre_finance'], 
+            'superfice'    => $row['superfice'], 
+            'adress'    => $row['adress'], 
+            'ville'    => $row['ville'], 
+            'autorisation'    => $row['autorisation'], 
+            'datedebut'    =>  Carbon::parse($row['datedebut' ])->format('Y-m-d'), 
+            'datefin'    => Carbon::parse($row['datefin' ])->format('Y-m-d'), 
+        ]);
 
-  for ($i=0; $i < count( $imagesCollection); $i++) { 
-    Projet::create([
-        'name'     => $row['name'],
-        'image'    => 'images/projets/'. $imagesCollection[$i], 
-        'consistance'    => $row['consistance'], 
-        'titre_finance'    => $row['titre_finance'], 
-        'superfice'    => $row['superfice'], 
-        'adress'    => $row['adress'], 
-        'ville'    => $row['ville'], 
-        'autorisation'    => $row['autorisation'], 
-        'datedebut'    =>  Carbon::parse($row['datedebut' ])->format('Y-m-d'), 
-        'datefin'    => Carbon::parse($row['datefin' ])->format('Y-m-d'), 
-    ]);
-  }
-      
-
-
-     
+        
     
     }
 }
