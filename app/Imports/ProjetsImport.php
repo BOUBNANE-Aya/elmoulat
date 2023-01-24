@@ -39,8 +39,8 @@ class ProjetsImport implements ToModel,WithHeadingRow
        
         $i = 0;
         $currentImage = "";
-
-foreach ($spreadsheet->getActiveSheet()->getDrawingCollection() as $key => $drawing) {
+//  fetch images from exel file
+foreach ($spreadsheet->getActiveSheet()->getDrawingCollection() as  $drawing) {
 
 
     if ($drawing instanceof MemoryDrawing) {
@@ -75,15 +75,23 @@ foreach ($spreadsheet->getActiveSheet()->getDrawingCollection() as $key => $draw
    
     $myFileName = time() .++$i. '.' . $extension;
   
-    $imagesCollection[$key] =$myFileName;
-    
+    $imagesCollection[] =$myFileName;
    
-   $path = Storage::disk('local')->put('public/images/projets/'.$myFileName,$imageContents);
+   
+   
+   Storage::disk('local')->put('public/images/projets/'.$myFileName,$imageContents);
 
    
-    $projets [] =new Projet([
+   
+
+   
+}
+
+
+  for ($i=0; $i < count( $imagesCollection); $i++) { 
+    Projet::create([
         'name'     => $row['name'],
-        'image'    => 'images/projets/'.$imagesCollection[$key], 
+        'image'    => 'images/projets/'. $imagesCollection[$i], 
         'consistance'    => $row['consistance'], 
         'titre_finance'    => $row['titre_finance'], 
         'superfice'    => $row['superfice'], 
@@ -93,16 +101,11 @@ foreach ($spreadsheet->getActiveSheet()->getDrawingCollection() as $key => $draw
         'datedebut'    =>  Carbon::parse($row['datedebut' ])->format('Y-m-d'), 
         'datefin'    => Carbon::parse($row['datefin' ])->format('Y-m-d'), 
     ]);
-    
-
-   
-}
-
-return  $projets;
+  }
+      
 
 
-
-        
      
+    
     }
 }

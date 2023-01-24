@@ -7,7 +7,7 @@
                 <div class="shop-breadcrumb">
 
                     <div class="breadcrumb-main">
-                        <h4 class="text-capitalize breadcrumb-title">Projets</h4>
+                        <h4 class="text-capitalize breadcrumb-title"></h4>
                         <div class="breadcrumb-action justify-content-center flex-wrap">
 
                             <div class="dropdown action-btn">
@@ -33,8 +33,7 @@
                                 <button type="button" class="btn btn-sm btn-primary btn-add" data-toggle="modal"
                                     data-target="#modal-import">
                                     <i class="la la-plus"></i>importer</button>
-
-
+                        
                             </div>
 
                             <div class="action-btn">
@@ -60,20 +59,32 @@
         </div>
     @endif
     <div class="container-fluid">
+     <div class="action-btn mb-3">
+
+         <button type="button" class="@if($bulkDisabled) disabled @endif btn btn-sm btn-danger" wire:click="deleteSelected"
+                                   >
+            <i class="la la-trash"></i>delete selected</button>
+                                   
+
+        </div>
         <div class="row">
             <div class="col-lg-12">
+           
                 <div
                     class="userDatatable orderDatatable shipped-dataTable global-shadow border p-30 bg-white radius-xl w-100 mb-30">
                     <div class="table-responsive">
                         <table class="table mb-0 table-borderless border-0">
                             <thead>
                                 <tr class="userDatatable-header">
-                                    <th>
-                                        <div class="d-flex align-items-center">
-
-
-
-                                        </div>
+                                    <th >
+                                      
+                                             <div class="form-check">
+                                               <input  type="checkbox" wire:model="selectAll" >
+                                            
+  
+                                                </div>
+         
+                                       
                                     </th>
                                     <th>
                                         <span class="userDatatable-title">id</span>
@@ -120,22 +131,10 @@
                                     @foreach ($projets as $projet)
                                         <tr>
                                             <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class=" userDatatable__imgWrapper d-flex align-items-center">
-                                                        <div class="checkbox-group-wrapper">
-                                                            <div class="checkbox-group d-flex">
-                                                                <div
-                                                                    class="checkbox-theme-default custom-checkbox checkbox-group__single d-flex">
-                                                                    <input class="checkbox" type="checkbox"
-                                                                        id="check-grp-12">
-                                                                    <label for="check-grp-12">
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
+                                                <div class="form-check">
+                                                   <input type="checkbox" wire:model="selectedProjects" value="{{ $projet->id }}" >
+  
+                                                  </div> 
                                             </td>
                                             <td>
                                                 <div class="orderDatatable-title">

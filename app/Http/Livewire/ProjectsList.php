@@ -13,6 +13,9 @@ class ProjectsList extends Component
 
     public $name , $dated, $datef ,$autorisation , $superfice ,$image,$consistance ,$adress,$ville ,$titre_finance , $project_edit_id;
     public $exelFile;
+    public $selectedProjects = [];
+    public $selectAll = false;
+    public $bulkDisabled = true;
     protected $listeners = ['saveData' => 'saveData'];
 
 //   validation real -time
@@ -147,6 +150,27 @@ public function resetInputs(){
         
     }
 //  delete project end
+// delete multiple projects start
+
+
+public function  deleteSelected(){
+    Projet::query()
+        ->whereIn('id',$this->selectedProjects)
+        ->delete();
+
+    $this->selectedProjects = [];
+    $this->selectAll = false;
+    
+}
+ public function updatedSelectAll($value){
+    if($value){
+        $this->selectedProjects = Projet::pluck('id');
+    }else{
+        $this->selectedProjects = [];
+    }
+ }
+
+// delete multiple projects end
 //  import project start
 
      public function importData(){
@@ -171,6 +195,7 @@ public function resetInputs(){
 
     public function render()
     {
+        $this->bulkDisabled = count($this->selectedProjects) < 1;
         $projets = Projet::orderBy('id', 'DESC')->get();
         return view('livewire.projects-list',['projets'=>$projets]);
     }
