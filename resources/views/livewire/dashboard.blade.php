@@ -20,8 +20,8 @@
                             </a>
                         </li>
                         <li>
-                            <a href="" class="">
-                                <span data-feather="file" class="nav-icon"></span>
+                            <a  wire:click="changeTab('ouvriers')" class="$currentTab === 'ouvriers' ? 'active' : ''">
+                                <span data-feather="folder" class="nav-icon"></span>
                                 <span class="menu-text">Ouvriers</span>
                             </a>
                         </li>
@@ -735,6 +735,12 @@
        @endif
        @if($currentTab === 'fournisseurs')
        <livewire:fournisseurs-list>
+        
+        
+        
+       @endif
+       @if($currentTab === 'ouvriers')
+       <livewire:ouvriers-list>
         
        @endif
        

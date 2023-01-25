@@ -9,10 +9,6 @@ use App\Models\Fornisseur;
 class FournisseursList extends Component
 {
 
-   
-
-
-
 
 
     public function render()

@@ -16,11 +16,12 @@ class Ouvrier extends Model
     protected $fillable = [
         
         'nom',
-        'dateNais',
+        'datenais',
         'cin',
-        'N_CIN',
-        'date_dube',
+        'n_cin',
+        'datedubet',
         'observation',
         'notation',
+        'contrat',
     ];
 }

@@ -326,6 +326,7 @@
                                     @error('name')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
+                                    
                                 </div>
 
                                 <div class="form-group mb-25">
