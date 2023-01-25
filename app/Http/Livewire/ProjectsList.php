@@ -19,7 +19,7 @@ class ProjectsList extends Component
     public $selectAll = false;
     public $bulkDisabled = true;
     public $pages = 5;
-    protected $listeners = ['saveData' => 'saveData'];
+    // protected $listeners = ['saveData'];
 
 //   validation real -time
     public function updated($fields){
@@ -72,13 +72,13 @@ class ProjectsList extends Component
         
         $this->dispatchBrowserEvent('add');
 
-        // for hidden the model
+        // for hidden the model after adding the project
         $this->dispatchBrowserEvent('close-model');
        
 
     }
 // save project end
-//  edit project
+//  edit project start
 
 public function resetInputs(){
         
@@ -126,7 +126,7 @@ public function resetInputs(){
         session()->flash('message','projet bien modifer');
         $this->dispatchBrowserEvent('close-model');
     }
-
+//  edit project end
 //  delete project start
 
     public function deleteProject($id){

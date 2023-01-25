@@ -17,4 +17,9 @@ class f_domaine extends Model
         'name',
     
     ];
+
+    // public function fournisseur()
+    // {
+    //     return $this->belongsToMany(Fornisseur::class);
+    // }
 }

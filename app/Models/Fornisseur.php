@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Fornisseur extends Model
+class Fournisseur extends Model
 {
     use HasFactory;
       /**
@@ -21,4 +21,9 @@ class Fornisseur extends Model
         'email',
         'adress',
     ];
+
+    public function fdomaine()
+    {
+        return $this->hasOne(f_domaine::class);
+    }
 }
