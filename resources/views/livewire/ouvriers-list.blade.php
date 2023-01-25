@@ -9,7 +9,7 @@
                         <div class="breadcrumb-main">
                             <h4 class="text-capitalize breadcrumb-title">Projets</h4>
 
-                            <button type="button" class="btn btn-sm btn-danger btn-add" wire:click.prevent="deletecheckedouvrier()">Delete</button>
+                       
                            
                             <div class="breadcrumb-action justify-content-center flex-wrap">
                                
@@ -66,27 +66,19 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
+                     <button type="button" class=" btn btn-sm btn-danger btn-add  " @if($btndelete) disabled @endif data-target="#modal-all-delete" data-toggle="modal" >Delete</button>
                     <div
                         class="userDatatable orderDatatable shipped-dataTable global-shadow border p-30 bg-white radius-xl w-100 mb-30">
                         <div class="table-responsive">
+                           
                             <table class="table mb-0 table-borderless border-0">
                                 <thead>
                                     <tr class="userDatatable-header">
-                                        {{-- <th>
-                                            <div
-                                              class="checkbox-theme-default custom-checkbox checkbox-group__single d-flex">
-                                               <input class="checkbox" type="checkbox" wire:checked.prevent="checkallboxs"
-                                              id="check-grp-12"   >
-                                             <label for="check-grp-12">
-                                               </label>
-                                            </div>
-                                           
-                                        </th> --}}
-                                        <th><input type="checkbox"></th>
+                                        
                                         <th>
-                                            <div class="d-flex align-items-center">
-                                            </div>
+                                            <input type="checkbox" wire:model="selectAll">
                                         </th>
+                                        
                                         <th>
                                             <span class="userDatatable-title">id</span>
                                         </th>
@@ -110,6 +102,9 @@
                                         </th>
                                         <th>
                                             <span class="userDatatable-title">notation</span>
+                                        </th>
+                                        <th>
+                                            <span class="userDatatable-title">contart</span>
                                         </th>
                                         
                                     </tr>
@@ -166,6 +161,11 @@
                                                 <td>
                                                     <div class="orderDatatable-title">
                                                         {{ $ouvrier->notation }}
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="orderDatatable-title">
+                                                        {{ $ouvrier->contrat }}
                                                     </div>
                                                 </td>
     
@@ -256,10 +256,10 @@
                                <form  enctype="multipart/form-data">
                                     <div class="form-group mb-25">
     
-                                        <label>Importer des projets depuis un fichier xlxs</label>
-                                        <input class="form-control form-control-lg" type="file" name="exelFile"
-                                            wire:model.defer='exelFile'>
-                                        @error('exelFile')
+                                        <label>Importer des Ouvriers depuis un fichier xlxs</label>
+                                        <input class="form-control form-control-lg" type="file" name="excelFile"
+                                            wire:model.defer='excelFile'>
+                                        @error('excelFile')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                      
@@ -337,7 +337,7 @@
                                     </div>
                                     <div class="form-group mb-25">
                                         <label>Numero CIN</label>
-                                        <input class="form-control form-control-lg" type="number" name="n_cin"
+                                        <input class="form-control form-control-lg" type="text" name="n_cin"
                                             wire:model.defer='n_cin'>
                                         @error('n_cin')
                                             <span class="text-danger">{{ $message }}</span>
@@ -369,7 +369,7 @@
                                     </div>
                                     <div class="form-group mb-25">
                                         <label>Contrat</label>
-                                        <input class="form-control form-control-lg" type="number" name="contarat"
+                                        <input class="form-control form-control-lg" type="text" name="contarat"
                                             wire:model.defer='contrat'>
                                         @error('contarat')
                                             <span class="text-danger">{{ $message }}</span>
@@ -530,6 +530,40 @@
     
     
         </div>
+
+
+
+        <div wire:ignore.self class="modal-info-delete modal fade show" id="modal-all-delete" tabindex="-1"
+        role="dialog" aria-hidden="true">
+
+
+        <div class="modal-dialog modal-sm modal-info" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="modal-info-body d-flex">
+                        <div class="modal-info-icon warning">
+                            <span data-feather="info"></span>
+                        </div>
+
+                        <div class="modal-info-text">
+                            <h6>Voulez-vous supprimer ce Ouvrier</h6>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-danger btn-outlined btn-sm"
+                        data-dismiss="modal">annuler</button>
+                    <button type="button" wire:click.prevent='deletecheckedouvrier()'
+                        class="btn btn-success btn-outlined btn-sm" data-dismiss="modal">supprimer</button>
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
     
         <!-- ends: .modal-info-Delete -->
     

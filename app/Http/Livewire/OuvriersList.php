@@ -5,19 +5,25 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\Ouvrier;
+use App\Imports\ImportOuvrier;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class OuvriersList extends Component
 {
     use WithFileUploads;
 
-    public $nom,$datenais,$cin,$n_cin,$datedubet,$observation,$notation,$id_ouvrier ,$contrat;
+    public $nom,$datenais,$cin,$n_cin,$datedubet,$observation,$notation,$id_ouvrier ,$contrat ,$excelFile;
 
     public $checked_id=[];
+    public $selectAll=false;
+    public $btndelete=true;
 
    
 
     public function render()
     {
+        $this->btndelete=count($this->checked_id)<1;
         $ouvriers=Ouvrier::orderBy('id','DESC')->get();
         return view('livewire.ouvriers-list',['ouvriers'=>$ouvriers]);
     }
@@ -220,8 +226,38 @@ class OuvriersList extends Component
         session()->flash('message','ouvriers bien supprimer');
         // pour vider les textboxs
         $this->checked_id=[];
+        $this->btndelete=true;
         
     }
+    public function updatedselectAll($value){
+        if($value){
+            $this->checked_id=Ouvrier::pluck('id');
+        
+        }
+        else{
+            $this->checked_id=[];
+            $this->btndelete=true;
+        }
+    }
+
+    //  import ouvrier 
+
+    public function importData(){
+        $this->validate([
+           
+            'excelFile'=>'required|mimes:xlsx,xls',
+        ]);
+
+    
+
+        // $path= $this->exelFile->store('documents/OuvrierExcel','app');
+        // $path = file_get_contents($path);
+        Excel::import(new ImportOuvrier,$this->excelFile->store('Documents/ouvrier','app'));
+        session()->flash('message','ouvriers bien imposter');
+        
+     }
+//  import project end
+
 
 
    

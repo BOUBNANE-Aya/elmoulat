@@ -17,7 +17,7 @@ class CreateOuvriersTable extends Migration
             $table->id();
             $table->string('nom');
             $table->date('datenais');
-            $table->string('cin');
+            $table->string('cin')->nullable();
             $table->string('n_cin');
             $table->date('datedubet');
             $table->string('observation');
