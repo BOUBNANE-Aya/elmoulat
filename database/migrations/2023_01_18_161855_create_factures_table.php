@@ -15,8 +15,8 @@ class CreateFacturesTable extends Migration
     {
         Schema::create('factures', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('fornisseur_id');
-            $table->foreign('fornisseur_id')->references('id')->on('fornisseurs'); 
+            $table->unsignedBigInteger('fournisseur_id');
+            $table->foreign('fournisseur_id')->references('id')->on('fournisseurs'); 
             $table->unsignedBigInteger('typefacture_id');
             $table->foreign('typefacture_id')->references('id')->on('type__factures'); 
             $table->integer('numero');

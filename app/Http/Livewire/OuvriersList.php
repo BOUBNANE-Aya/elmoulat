@@ -82,62 +82,7 @@ class OuvriersList extends Component
 
     }
 
-    // public function editOuvrier($id){
-    //     $ouvrier=Ouvrier::find($id);
-    //     $this->id_ouvrier=$id;
-    //     $this->nom=$ouvrier->nom;
-    //     $this->datenais=$ouvrier->dateNais;
-    //     $this->cin=$ouvrier->cin;
-    //     $this->n_cin=$ouvrier->n_cin;
-    //     $this->datedubet=$ouvrier->datedubet;
-    //     $this->observation=$ouvrier->observation;
-    //     $this->notation=$ouvrier->notation;
 
-      
-
-
-        
-    // }
-
-
-    // public function editData(){
-
-
-    //     $this->validate([
-    //         'nom'=>'required',
-    //         'datenais'=>'required|date',
-    //         'cin'=>'required',
-    //         'n_cin'=>'required',
-    //         'datedubet'=>'required|date',
-    //         'observation'=>'required',
-    //         'notation'=>'required|integer',
- 
- 
-    //      ]);
-        
-
-    //     $ouvrier=Ouvrier::find($this->id_ouvrier);
-    //     $ouvrier->update([
-
-
-    //         'nom'=>$this->nom,
-    //         'datenais'=>$this->datenais,
-    //         'cin'=>$this->cin,
-    //         'n_cin'=>$this->n_cin,
-    //         'datedubet'=>$this->datedubet,
-    //         'observation'=>$this->observation,
-    //         'notation'=>$this->notation,
-
-    //     ]);
-    //     session()->flash('message','Ouvriers bein Upaded');
-        
-    //     $this->resetInputs();
-    //     $this->dispatchBrowserEvent('close-model');
-
-
-
-
-    // }
 
 // delete ouvrier
 
@@ -170,6 +115,8 @@ class OuvriersList extends Component
         $this->dispatchBrowserEvent('close-model');
     }
 
+
+    
    //edit ouvrier=====================
 
     public function editOuvrier($id){
@@ -239,6 +186,9 @@ class OuvriersList extends Component
             $this->btndelete=true;
         }
     }
+    // end of check all boxs
+
+
 
     //  import ouvrier 
 
@@ -253,7 +203,7 @@ class OuvriersList extends Component
         // $path= $this->exelFile->store('documents/OuvrierExcel','app');
         // $path = file_get_contents($path);
         Excel::import(new ImportOuvrier,$this->excelFile->store('Documents/ouvrier','app'));
-        session()->flash('message','ouvriers bien imposter');
+        session()->flash('message','ouvriers bien importer');
         
      }
 //  import project end

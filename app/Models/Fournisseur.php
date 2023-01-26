@@ -4,8 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\f_domaine;
 
-class Fornisseur extends Model
+class Fournisseur extends Model
 {
     use HasFactory;
       /**
@@ -14,11 +15,15 @@ class Fornisseur extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'fdomaine_id',
-        'nom',
+        'id_fdomaine',
+        'name',
         'ice',
         'phone',
         'email',
         'adress',
     ];
+
+    public function fdomaine(){
+        return $this->belongsTo(f_domaine::class,'id');
+    }
 }

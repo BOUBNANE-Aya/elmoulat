@@ -15,8 +15,8 @@ class CreateChargesTable extends Migration
     {
         Schema::create('charges', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('fornisseur_id');
-            $table->foreign('fornisseur_id')->references('id')->on('fornisseurs'); 
+            $table->unsignedBigInteger('fournisseur_id');
+            $table->foreign('fournisseur_id')->references('id')->on('fournisseurs'); 
             $table->unsignedBigInteger('projet_id');
             $table->foreign('projet_id')->references('id')->on('projets'); 
             $table->unsignedBigInteger('ouvrier_id');
