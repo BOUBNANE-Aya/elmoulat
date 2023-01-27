@@ -14,10 +14,16 @@ class Reglement extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'cheque_id',
         'date',
         'methode',
         'montant',
+        'numero_cheque',
+        'id_transaction',
+        'id_facture',
+        'id_contrat',
+        'id_charge',
+
+       
         
     ];
 }

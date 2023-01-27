@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTypeCongésTable extends Migration
+class CreateDepotsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,13 @@ class CreateTypeCongésTable extends Migration
      */
     public function up()
     {
-        Schema::create('type__congés', function (Blueprint $table) {
+        Schema::create('depots', function (Blueprint $table) {
             $table->id();
-            $table->string('titre');
+            $table->date('date');
+            $table->integer('numero_cheque');
+            $table->float('montant');
+            $table->unsignedBigInteger('id_caisse');
+            $table->foreign('id_caisse')->references('id')->on('caisses'); 
             $table->timestamps();
         });
     }
@@ -27,6 +31,6 @@ class CreateTypeCongésTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('type__congés');
+        Schema::dropIfExists('depots');
     }
 }

@@ -24,5 +24,7 @@ class Projet extends Model
         'autorisation',
         'datedebut',
         'datefin',
+        'id_bureau',
+        'id_caisse',
     ];
 }

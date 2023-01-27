@@ -59,12 +59,11 @@
             </div>
         @endif
         <div class="container-fluid">
+           
          <div class="action-btn mb-3">
     
-             <button type="button" class=" btn btn-sm btn-danger btn-add  " @if($bulkDisabled) disabled @endif data-target="#modal-all-delete"
-                                       >
-                <i class="la la-trash"></i>delete selected</button>
-                                       
+            <button type="button" class=" btn btn-sm btn-danger btn-add  " @if($bulkDisabled) disabled @endif data-toggle="modal" data-target="#modal-all-delete" >
+             <i class="la la-trash"></i>delete selected</button>
     
             </div>
             <div class="row">

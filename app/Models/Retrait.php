@@ -5,16 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Type_Congé extends Model
+class Retrait extends Model
 {
     use HasFactory;
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
-        'titre',
-    
+        'id_caisse',
+        'operation_ref',
+        'id_reglement',
+        'montant',
+        'date',
+        'id_depense',
+
+        
+      
+        
     ];
 }

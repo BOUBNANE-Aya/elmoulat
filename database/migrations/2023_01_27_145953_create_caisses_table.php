@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTypeFacturesTable extends Migration
+class CreateCaissesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,12 @@ class CreateTypeFacturesTable extends Migration
      */
     public function up()
     {
-        Schema::create('type__factures', function (Blueprint $table) {
+        Schema::create('caisses', function (Blueprint $table) {
             $table->id();
-            $table->string('nom');
+            $table->float('sold_nonjustify');
+            $table->float('sold');
+            $table->float('total');
+         
             $table->timestamps();
         });
     }
@@ -27,6 +30,6 @@ class CreateTypeFacturesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('type__factures');
+        Schema::dropIfExists('caisses');
     }
 }

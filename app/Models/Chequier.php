@@ -5,13 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Bureau extends Model
+class Chequier extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'nom',
-        'ville',
-        'phone',
         
+        'datedubet',
+        'datefin',
+        'numero_dubet',
+        'numero_fin',
+        'id_compte',
+       
+       
     ];
 }

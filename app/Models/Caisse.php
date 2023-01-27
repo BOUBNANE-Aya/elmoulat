@@ -5,13 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Bureau extends Model
+class Caisse extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'nom',
-        'ville',
-        'phone',
-        
+        'sold_nonjustify',
+        'sold',
+        'total',
+ 
     ];
+   
 }
