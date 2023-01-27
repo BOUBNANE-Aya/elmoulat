@@ -7,7 +7,7 @@
                     <div class="shop-breadcrumb">
     
                         <div class="breadcrumb-main">
-                            <h4 class="text-capitalize breadcrumb-title">Projets</h4>
+                            <h4 class="text-capitalize breadcrumb-title">Ouvriers</h4>
 
                        
                            
@@ -64,9 +64,17 @@
             </div>
         @endif
         <div class="container-fluid">
+            <div class="action-btn mb-3">
+
+                <button type="button" class=" btn btn-sm btn-danger btn-add  " @if($btndelete) disabled @endif data-target="#modal-all-delete" data-toggle="modal" >
+                                          
+                   <i class="la la-trash"></i>delete selected</button>
+                                          
+       
+               </div>
             <div class="row">
                 <div class="col-lg-12">
-                     <button type="button" class=" btn btn-sm btn-danger btn-add  " @if($btndelete) disabled @endif data-target="#modal-all-delete" data-toggle="modal" >Delete</button>
+                     
                     <div
                         class="userDatatable orderDatatable shipped-dataTable global-shadow border p-30 bg-white radius-xl w-100 mb-30">
                         <div class="table-responsive">

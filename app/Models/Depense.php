@@ -15,11 +15,14 @@ class Depense extends Model
      */
     protected $fillable = [
         
-        'Reglement_id',
-        'numero',
+        'id_projet',
+        'id_ouvrier',
         'date',
         'methode',
+        'apartient',
+        'type',
         'montant',
       
     ];
+
 }

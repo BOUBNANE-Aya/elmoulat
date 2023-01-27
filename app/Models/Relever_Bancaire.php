@@ -18,6 +18,8 @@ class Relever_Bancaire extends Model
         'date',
         'operation_ref',
         'debit',
+        'credit'
+      
         
     ];
 }

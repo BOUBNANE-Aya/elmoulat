@@ -12,6 +12,6 @@ class Bureau extends Model
         'nom',
         'ville',
         'phone',
-        'phone',
+        
     ];
 }

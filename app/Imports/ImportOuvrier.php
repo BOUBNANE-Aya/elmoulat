@@ -4,6 +4,7 @@ namespace App\Imports;
 
 use App\Models\Ouvrier;
 use Maatwebsite\Excel\Concerns\ToModel;
+
 use Carbon\Carbon;
 
 class ImportOuvrier implements ToModel
@@ -21,14 +22,15 @@ class ImportOuvrier implements ToModel
 
             // str_replace("/","-","$row[1]")
             'nom'=>$row[0],
-            'datenais'=> Carbon::parse($row[1])->format('Y-m-d'),
-            'cin'=>$row[2],
+            'datenais'=> '2000-02-02',
+            'cin'=>'',
             'n_cin'=>$row[3],
-            'datedubet'=>Carbon::parse($row[4])->format('Y-m-d'),
+            'datedubet'=>'2000-02-02',
             'observation'=>$row[5],
             'notation'=>$row[6],
             'contrat'=>$row[7],
             //
         ]);
+        // Carbon::createFromFormat('d/m/Y',$row[1])->format('Y-m-d')
     }
 }

@@ -15,13 +15,13 @@ class CreateFournisseursTable extends Migration
     {
         Schema::create('fournisseurs', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('fdomaine_id');
-            $table-> string('nom');
+            $table->unsignedBigInteger('id_fdomaine');
+            $table-> string('name');
             $table-> integer('ice');
             $table-> integer('phone');
             $table-> string('email');
             $table-> string('adress');
-            $table->foreign('fdomaine_id')->references('id')->on('f_domaines');  
+            $table->foreign('id_fdomaine')->references('id')->on('f_domaines');  
             $table->timestamps();
         });
     }

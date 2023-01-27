@@ -15,13 +15,12 @@ class CreateFacturesTable extends Migration
     {
         Schema::create('factures', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('fornisseur_id');
-            $table->foreign('fornisseur_id')->references('id')->on('fornisseurs'); 
-            $table->unsignedBigInteger('typefacture_id');
-            $table->foreign('typefacture_id')->references('id')->on('type__factures'); 
+            $table->unsignedBigInteger('fournisseur_id');
+            $table->foreign('fournisseur_id')->references('id')->on('fournisseurs'); 
             $table->integer('numero');
             $table->date('date');
             $table->string('scan_pdf');
+            $table->string('type');
             $table->timestamps();
         });
     }

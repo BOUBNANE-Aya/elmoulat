@@ -16,11 +16,11 @@ class Cheque extends Model
      */
     protected $fillable = [
         
-        'date',
-        'numero_debut',
-        'numero_fin',
-        'nombre_cheque',
-        'nombre_used',
-        
+        'numero',
+        'datedebut',
+        'datefin',
+        'setiation',
+        'id_chequier',
+       
     ];
 }
