@@ -18,14 +18,5 @@ class f_domaine extends Model
     
     ];
 
-<<<<<<< HEAD
-    public function fournisseur(){
-        return $this->hasMany(Fournisseur::class);
-    }
-=======
-    // public function fournisseur()
-    // {
-    //     return $this->belongsToMany(Fornisseur::class);
-    // }
->>>>>>> d85ed4493797bec2c8d2bba4447c80b462057c93
+
 }

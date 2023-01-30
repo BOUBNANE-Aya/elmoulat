@@ -151,7 +151,7 @@
                                      
                                             <td>
                                             <div class="orderDatatable-title">
-                                                {{$fournisseur->fdomaine->name}}
+                                                {{-- {{$fournisseur->fdomaine->name}} --}}
                                             </div>
                                         </td>
                                       
@@ -279,8 +279,8 @@
                                 <div class="form-group mb-25">
                                     <label>Domaine </label>
                                     <select name="select-size-1" wire:model.defer='domaine' id="select-size-1" class="form-control  form-control-lg">
-                                    @foreach($f_domaines as $f_domaines)
-                                        <option value="{{$f_domaines->id}}">{{$f_domaines->name}}</option>
+                                    @foreach($f_domaines as $f_domaine)
+                                        <option value="{{$f_domaine->id}}">{{$f_domaine->name}}</option>
                                         
                                     @endforeach
                                         
