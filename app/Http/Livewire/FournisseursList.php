@@ -10,10 +10,6 @@ use App\Models\Fournisseur;
 class FournisseursList extends Component
 {
 
-   
-
-
-
 
     use WithFileUploads;
     use WithPagination;
