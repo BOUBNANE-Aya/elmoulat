@@ -18,9 +18,17 @@ use App\Http\Controllers\Auth\LoginController;
 |
 */
 
+// Route::get('/', function () {
+//     return view('auth.login');
+// });
+
 Route::get('/', function () {
-    return view('auth.login');
+    return view('layouts.app');
 });
+// Route::get('/', function () {
+//     return view('admin.ouvriers');
+// });
+
 
 Route::middleware(['middleware'=>'PreventBack'])->group(function () {
     Auth::routes();
@@ -37,6 +45,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth','PreventBack']]
     Route::get('dashboard',[AdminController::class,'index'])->name('admin.dashboard');
     Route::get('dashboard/projects',[AdminController::class,'projects'])->name('admin.projects');
     Route::get('dashboard/fournisseurs',[AdminController::class,'fournisseurs'])->name('admin.fournisseurs');
+    Route::get('dashboard/ouvriers',[AdminController::class,'ouvriers'])->name('admin.ouvriers');
     
 });
 
@@ -52,3 +61,5 @@ Route::group(['prefix'=>'user', 'middleware'=>['isUser','auth','PreventBack']], 
 
 Route::get('dashboard',[UserController::class,'index'])->name('user.dashboard');
 });
+
+

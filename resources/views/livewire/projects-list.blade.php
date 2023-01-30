@@ -7,7 +7,7 @@
                 <div class="shop-breadcrumb">
 
                     <div class="breadcrumb-main">
-                        <h4 class="text-capitalize breadcrumb-title">Projets</h4>
+                        <h4 class="text-capitalize breadcrumb-title"></h4>
                         <div class="breadcrumb-action justify-content-center flex-wrap">
 
                             <div class="dropdown action-btn">
@@ -33,8 +33,7 @@
                                 <button type="button" class="btn btn-sm btn-primary btn-add" data-toggle="modal"
                                     data-target="#modal-import">
                                     <i class="la la-plus"></i>importer</button>
-
-
+                        
                             </div>
 
                             <div class="action-btn">
@@ -60,20 +59,32 @@
         </div>
     @endif
     <div class="container-fluid">
+     <div class="action-btn mb-3">
+
+         <button type="button" class="@if($bulkDisabled) disabled @endif btn btn-sm btn-danger" wire:click="deleteSelected"
+                                   >
+            <i class="la la-trash"></i>delete selected</button>
+                                   
+
+        </div>
         <div class="row">
             <div class="col-lg-12">
+           
                 <div
                     class="userDatatable orderDatatable shipped-dataTable global-shadow border p-30 bg-white radius-xl w-100 mb-30">
                     <div class="table-responsive">
                         <table class="table mb-0 table-borderless border-0">
                             <thead>
                                 <tr class="userDatatable-header">
-                                    <th>
-                                        <div class="d-flex align-items-center">
-
-
-
-                                        </div>
+                                    <th >
+                                      
+                                             <div class="form-check">
+                                               <input  type="checkbox" wire:model="selectAll" >
+                                            
+  
+                                                </div>
+         
+                                       
                                     </th>
                                     <th>
                                         <span class="userDatatable-title">id</span>
@@ -109,6 +120,12 @@
                                         <span class="userDatatable-title">date de fin</span>
                                     </th>
                                     <th>
+                                        <span class="userDatatable-title float-right">Bureau</span>
+                                    </th>
+                                    <th>
+                                        <span class="userDatatable-title float-right">Caisse</span>
+                                    </th>
+                                    <th>
                                         <span class="userDatatable-title float-right">Actions</span>
                                     </th>
                                 </tr>
@@ -120,22 +137,10 @@
                                     @foreach ($projets as $projet)
                                         <tr>
                                             <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class=" userDatatable__imgWrapper d-flex align-items-center">
-                                                        <div class="checkbox-group-wrapper">
-                                                            <div class="checkbox-group d-flex">
-                                                                <div
-                                                                    class="checkbox-theme-default custom-checkbox checkbox-group__single d-flex">
-                                                                    <input class="checkbox" type="checkbox"
-                                                                        id="check-grp-12">
-                                                                    <label for="check-grp-12">
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
+                                                <div class="form-check">
+                                                   <input type="checkbox" wire:model="selectedProjects" value="{{ $projet->id }}" >
+  
+                                                  </div> 
                                             </td>
                                             <td>
                                                 <div class="orderDatatable-title">
@@ -212,6 +217,8 @@
                                             </td>
                                         </tr>
                                     @endforeach
+
+                                   
                                 @else
                                 @endif
 
@@ -227,33 +234,19 @@
                         </table><!-- End: table -->
                     </div>
                     <div class="d-flex justify-content-sm-end justify-content-start mt-15 pt-25 border-top">
-
+   
                         <nav class="atbd-page ">
                             <ul class="atbd-pagination d-flex">
                                 <li class="atbd-pagination__item">
-                                    <a href="#" class="atbd-pagination__link pagination-control"><span
-                                            class="la la-angle-left"></span></a>
-                                    <a href="#" class="atbd-pagination__link"><span
-                                            class="page-number">1</span></a>
-                                    <a href="#" class="atbd-pagination__link active"><span
-                                            class="page-number">2</span></a>
-                                    <a href="#" class="atbd-pagination__link"><span
-                                            class="page-number">3</span></a>
-                                    <a href="#" class="atbd-pagination__link pagination-control"><span
-                                            class="page-number">...</span></a>
-                                    <a href="#" class="atbd-pagination__link"><span
-                                            class="page-number">12</span></a>
-                                    <a href="#" class="atbd-pagination__link pagination-control"><span
-                                            class="la la-angle-right"></span></a>
-                                    <a href="#" class="atbd-pagination__option">
-                                    </a>
+                                      {{ $projets->links('vendor.livewire.bootstrap') }}
                                 </li>
                                 <li class="atbd-pagination__item">
                                     <div class="paging-option">
-                                        <select name="page-number" class="page-selection">
+                                        <select wire:model="pages" name="page-number" class="page-selection">
+                                            <option value="5">5/page</option>
+                                            <option value="10">10/page</option>
                                             <option value="20">20/page</option>
                                             <option value="40">40/page</option>
-                                            <option value="60">60/page</option>
                                         </select>
                                     </div>
                                 </li>
@@ -328,7 +321,7 @@
                         <span data-feather="x"></span></button>
                 </div>
                 <div class="modal-body">
-                    <div class="row">
+                    
 
                         <form enctype="multipart/form-data">
                             <div class="form-basic">
@@ -339,6 +332,7 @@
                                     @error('name')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
+                                    
                                 </div>
 
                                 <div class="form-group mb-25">
@@ -430,7 +424,7 @@
                     </div>
 
 
-                </div>
+              
                 <div class="modal-footer">
                     <button wire:click.prevent="saveData" class="btn btn-primary btn-sm">Enregistrer projet</button>
                 </div>
@@ -460,7 +454,6 @@
                         <span data-feather="x"></span></button>
                 </div>
                 <div class="modal-body">
-                    <div class="row">
 
                         <form wire:submit.prevent='editData'>
                             <div class="form-basic">
@@ -532,7 +525,7 @@
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
-                            </div>
+                          
                             <div class="form-group mb-25">
                                 <label>Date de fin</label>
                                 <input class="form-control form-control-lg" type="date" wire:model.defer='datef'
@@ -545,8 +538,8 @@
                             </div>
                     </div>
 
-
-                </div>
+ 
+              
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary btn-sm">Enregistrer projet</button>
                 </div>
