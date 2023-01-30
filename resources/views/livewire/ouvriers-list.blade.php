@@ -111,9 +111,7 @@
                                         <th>
                                             <span class="userDatatable-title">notation</span>
                                         </th>
-                                        <th>
-                                            <span class="userDatatable-title">contart</span>
-                                        </th>
+                                       
                                         
                                     </tr>
                                 </thead>
@@ -171,11 +169,7 @@
                                                         {{ $ouvrier->notation }}
                                                     </div>
                                                 </td>
-                                                <td>
-                                                    <div class="orderDatatable-title">
-                                                        {{ $ouvrier->contrat }}
-                                                    </div>
-                                                </td>
+                                               
     
                                                
                                                 <td>
@@ -375,14 +369,7 @@
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
-                                    <div class="form-group mb-25">
-                                        <label>Contrat</label>
-                                        <input class="form-control form-control-lg" type="text" name="contarat"
-                                            wire:model.defer='contrat'>
-                                        @error('contarat')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
+                                    
                                     
                                    
                                 </div>

@@ -120,6 +120,12 @@
                                         <span class="userDatatable-title">date de fin</span>
                                     </th>
                                     <th>
+                                        <span class="userDatatable-title float-right">Bureau</span>
+                                    </th>
+                                    <th>
+                                        <span class="userDatatable-title float-right">Caisse</span>
+                                    </th>
+                                    <th>
                                         <span class="userDatatable-title float-right">Actions</span>
                                     </th>
                                 </tr>

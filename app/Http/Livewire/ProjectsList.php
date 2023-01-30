@@ -13,7 +13,7 @@ class ProjectsList extends Component
     use WithFileUploads;
     use WithPagination;
 
-    public $name , $dated, $datef ,$autorisation , $superfice ,$image,$consistance ,$adress,$ville ,$titre_finance , $project_edit_id;
+    public $name , $dated, $datef ,$autorisation , $superfice ,$image,$consistance ,$adress,$ville ,$titre_finance , $project_edit_id,$id_bureau,$id_caisse;
     public $exelFile;
     public $selectedProjects = [];
     public $selectAll = false;
@@ -29,6 +29,8 @@ class ProjectsList extends Component
              'ville'=>'required',
              'datef'=>'required|date',
              'dated'=>'required|date',
+             'id_bureau'=>'required|integer',
+             'id_caisse'=>'required|integer',
         ]);
     }
 
@@ -40,6 +42,9 @@ class ProjectsList extends Component
             'ville'=>'required',
             'datef'=>'required|date',
             'dated'=>'required|date',
+            'id_bureau'=>'required|integer',
+             'id_caisse'=>'required|integer',
+            
         ]);
         
         $validatedData= $this->image->store('images/projets', 'public');
@@ -54,6 +59,8 @@ class ProjectsList extends Component
         $projet->adress = $this->adress;
         $projet->datedebut = $this->dated;
         $projet->datefin = $this->datef;
+        $projet->id_bureau = $this->id_bureau;
+        $projet->id_caisse= $this->id_caisse;
         $projet->save();
         session()->flash('message','projet bien ajouter');
         
@@ -69,6 +76,8 @@ class ProjectsList extends Component
         $this->adress = "";
         $this->dated = "";
         $this->datef = "";
+        $this->id_caissse = "";
+        $this->id_bureau = "";
         
         $this->dispatchBrowserEvent('add');
 
@@ -92,6 +101,8 @@ public function resetInputs(){
         $this->adress = "";
         $this->dated = "";
         $this->datef = "";
+        $this->id_caissse = "";
+        $this->id_bureau = "";
         $this->$this->project_edit_id = "";
 }
 
@@ -108,6 +119,8 @@ public function resetInputs(){
         $this->titre_finance = $projet->titre_finance ;
         $this->autorisation  = $projet->autorisation;
         $this->superfice = $projet->superfice;
+        $this->id_bureau = $projet->id_bureau;
+        $this->id_caisse = $projet->id_caisse;
         
     }
     
@@ -122,6 +135,8 @@ public function resetInputs(){
         $projet->adress = $this->adress;
         $projet->datedebut = $this->dated;
         $projet->datefin = $this->datef;
+        $projet->id_bureau=$this->id_bureau ;
+        $projet->id_caisse=$this->id_caisse  ;
         $projet->save();
         session()->flash('message','projet bien modifer');
         $this->dispatchBrowserEvent('close-model');
@@ -142,6 +157,8 @@ public function resetInputs(){
         $this->autorisation  = $projet->autorisation;
         $this->superfice = $projet->superfice;
         $this->image = $projet->image ;
+        $this->id_bureau = $projet->id_bureau;
+        $this->id_caisse = $projet->id_caisse;
     }
     
     public function deleteData(){

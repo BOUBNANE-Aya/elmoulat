@@ -13,7 +13,7 @@ class OuvriersList extends Component
 {
     use WithFileUploads;
 
-    public $nom,$datenais,$cin,$n_cin,$datedubet,$observation,$notation,$id_ouvrier ,$contrat ,$excelFile;
+    public $nom,$datenais,$cin,$n_cin,$datedubet,$observation,$notation,$id_ouvrier,$excelFile;
 
     public $checked_id=[];
     public $selectAll=false;
@@ -55,7 +55,7 @@ class OuvriersList extends Component
         $ouvrier->datedubet=$this->datedubet;
         $ouvrier->observation=$this->observation;
         $ouvrier->notation=$this->notation;
-        $ouvrier->contrat=$this->contrat;
+        
         $ouvrier->save();
 
         $this->resetInputs();
@@ -78,7 +78,7 @@ class OuvriersList extends Component
         $this->datedubet="";
         $this->observation="";
         $this->notation="";
-        $this->contrat="";
+      
 
     }
 
@@ -98,7 +98,7 @@ class OuvriersList extends Component
         $this->datedubet = $ouvrier->datedubet;
         $this->observation = $ouvrier->obseravtion ;
         $this->notation = $ouvrier->notation ;
-        $this->contrat = $ouvrier->contrat ;
+     
        
         
 
@@ -130,7 +130,7 @@ class OuvriersList extends Component
         $this->datedubet = $ouvrier->datedubet;
         $this->observation = $ouvrier->observation ;
         $this->notation = $ouvrier->notation ;
-        $this->contrat = $ouvrier->contrat ;
+        
 
        
         
@@ -156,7 +156,7 @@ class OuvriersList extends Component
         $ouvrier->datedubet = $this->datedubet;
         $ouvrier->observation = $this->observation;
         $ouvrier->notation = $this->notation;
-        $ouvrier->contrat=$this->contrat ;
+       
 
         
         $ouvrier->save();
