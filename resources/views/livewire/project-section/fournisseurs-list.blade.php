@@ -124,7 +124,7 @@
                                                     </td>
                                                     <td>
                                                         <div class="orderDatatable-title">
-                                                            {{ $fournisseur->nom }}
+                                                            {{ $fournisseur->name }}
                                                         </div>
                                                     </td>
                                                     
@@ -152,7 +152,8 @@
                                                     </td>
                                                     <td>
                                                         <div class="orderDatatable-title">
-                                                            {{-- {{ $fournisseur->fdomaine->name}} --}}
+                                                            {{-- {{ $fournisseur->domaine->name}} --}}
+                                                            
                                                         </div>
                                                     </td>
                                                    
@@ -225,7 +226,7 @@
         </div>
 
 
-        {{--add project  modal --}}
+        {{--add Fournisseur  modal --}}
         <div wire:ignore.self class="modal-basic modal fade show" id="modal-basic" tabindex="-1" role="dialog" aria-hidden="true">
 
 
@@ -260,7 +261,7 @@
                                 <div class="form-group mb-25">
                                     <label>Phone</label>
                                     <input class="form-control form-control-lg" type="text" name="phone" wire:model.defer='phone'>
-                                    @error('ice')
+                                    @error('phone')
                                     <span class="text-danger">{{$message}}</span>
 
                                     @enderror
@@ -284,7 +285,8 @@
 
                                 <div class="form-group mb-25">
                                     <label>Domaine </label>
-                                    <select name="select-size-1" wire:model.defer='domaine' id="select-size-1" class="form-control  form-control-lg">
+                                    <select name="select-size-1" wire:model.defer='id_fdomaine' id="select-size-1" class="form-control  form-control-lg">
+                                        <option value="" selected>select an option</option>
                                     @foreach($f_domaines as $f_domaine)
                                         <option value="{{$f_domaine->id}}">{{$f_domaine->name}}</option>
                                         
@@ -300,7 +302,7 @@
 
 
                             <div class="modal-footer">
-                                <button wire:click.prevent="saveData" class="btn btn-primary btn-sm">Enregistrer</button>
+                                <button wire:click.prevent="saveData()" class="btn btn-primary btn-sm">Enregistrer</button>
                             </div>
                         </form>
                     </div>

@@ -135,6 +135,17 @@
                         </a>
 
                     </li>
+                    <li>
+
+                        <a  wire:click="changeTab('Domaine')" class="$currentTab === 'Domaine' ? 'active' : ''">
+
+                            <span  class="nav-icon"> <i class="fa-solid fa-book "></i></span>
+
+                            <span class="menu-text">Domaine</span>
+
+                        </a>
+
+                    </li>
 
                      <li>
 

@@ -199,6 +199,16 @@
                                                     {{ $projet->datefin }}
                                                 </div>
                                             </td>
+                                            <td>
+                                                <div class="orderDatatable-title">
+                                                    {{ $projet->bureau->nom }}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="orderDatatable-title">
+                                                    {{ $projet->caisse->id }}
+                                                </div>
+                                            </td>
 
                                             <td>
                                                 <ul class="orderDatatable_actions mb-0 d-flex">
