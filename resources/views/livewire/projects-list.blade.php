@@ -321,7 +321,7 @@
                         <span data-feather="x"></span></button>
                 </div>
                 <div class="modal-body">
-                    <div class="row">
+                    
 
                         <form enctype="multipart/form-data">
                             <div class="form-basic">
@@ -424,7 +424,7 @@
                     </div>
 
 
-                </div>
+              
                 <div class="modal-footer">
                     <button wire:click.prevent="saveData" class="btn btn-primary btn-sm">Enregistrer projet</button>
                 </div>
@@ -454,7 +454,6 @@
                         <span data-feather="x"></span></button>
                 </div>
                 <div class="modal-body">
-                    <div class="row">
 
                         <form wire:submit.prevent='editData'>
                             <div class="form-basic">
@@ -526,7 +525,7 @@
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
-                            </div>
+                          
                             <div class="form-group mb-25">
                                 <label>Date de fin</label>
                                 <input class="form-control form-control-lg" type="date" wire:model.defer='datef'
@@ -539,8 +538,8 @@
                             </div>
                     </div>
 
-
-                </div>
+ 
+              
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary btn-sm">Enregistrer projet</button>
                 </div>

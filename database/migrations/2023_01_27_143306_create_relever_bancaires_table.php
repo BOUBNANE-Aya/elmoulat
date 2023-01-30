@@ -13,12 +13,13 @@ class CreateReleverBancairesTable extends Migration
      */
     public function up()
     {
-        Schema::create('relever__bancaires', function (Blueprint $table) {
+        Schema::create('relever_bancaires', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('compte_id');
             $table->date('date');
             $table->string('operation_ref');
             $table->float('debit');
+            $table->float('credit');
             $table->foreign('compte_id')->references('id')->on('comptes');
             $table->timestamps();
         });
@@ -31,6 +32,6 @@ class CreateReleverBancairesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('relever__bancaires');
+        Schema::dropIfExists('relever_bancaires');
     }
 }

@@ -5,11 +5,18 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\f_domaine;
 use App\Models\Fournisseur;
+<<<<<<< HEAD
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
+=======
+>>>>>>> d85ed4493797bec2c8d2bba4447c80b462057c93
 
 class FournisseursList extends Component
 {
+
+   
+
+
 
 
     use WithFileUploads;
@@ -25,6 +32,7 @@ class FournisseursList extends Component
 
     public function render()
     {
+<<<<<<< HEAD
         $this->bulkDisabled = count($this->selectedfournisseur) < 1;
         $fournisseurs = Fournisseur::all();
         $fdomaines=f_domaine::all();
@@ -201,4 +209,11 @@ if($value){
 
 
     
+=======
+        $fournisseurs = Fournisseur::all();
+        // $fdom = f_domaine::where('id',$fournisseurs->fdomaine_id)->get();
+        $f_domaines = f_domaine::all();
+        return view('livewire.fournisseurs-list',['f_domaines'=>$f_domaines,'fournisseurs'=>$fournisseurs]);
+    } 
+>>>>>>> d85ed4493797bec2c8d2bba4447c80b462057c93
 }

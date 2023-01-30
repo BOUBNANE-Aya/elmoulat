@@ -17,10 +17,10 @@ class CreateComptesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('bank_id');
             $table->foreign('bank_id')->references('id')->on('banks');
-            $table->unsignedBigInteger('cheque_id');
-            $table->foreign('cheque_id')->references('id')->on('cheques');
+           
             $table->integer('numero');
             $table->date('date_creation');
+            $table->float('sold');
             $table->timestamps();
         });
     }
