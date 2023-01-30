@@ -25,6 +25,10 @@ class CreateProjetsTable extends Migration
             $table->string('autorisation');
             $table->date('datedebut');
             $table->date('datefin');
+            $table->unsignedBigInteger('id_caisse');
+            $table->foreign('id_caisse')->references('id')->on('caisses'); 
+            $table->unsignedBigInteger('id_bureau');
+            $table->foreign('id_bureau')->references('id')->on('bureaus'); 
          
             $table->timestamps();
         });

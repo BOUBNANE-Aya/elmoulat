@@ -16,9 +16,7 @@ class Conge extends Model
     protected $fillable = [
         
         'employe_id',
-        'type_conge_id',
-        'type_conge_id',
-        'employe_id',
+        'type',
         'date_dubet',
         'date_fin',
         'jours',

@@ -16,12 +16,13 @@ class CreateOuvriersTable extends Migration
         Schema::create('ouvriers', function (Blueprint $table) {
             $table->id();
             $table->string('nom');
-            $table->date('dateNais');
-            $table->string('cin');
-            $table->string('N_CIN');
-            $table->date('date-dube');
+            $table->date('datenais');
+            $table->string('cin')->nullable();
+            $table->string('n_cin');
+            $table->date('datedubet');
             $table->string('observation');
             $table->integer('notation');
+            
             
             $table->timestamps();
         });

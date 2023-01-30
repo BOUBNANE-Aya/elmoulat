@@ -17,9 +17,10 @@ class Compte extends Model
    protected $fillable = [
        
        'bank_id',
-       'cheque_id',
        'numero',
        'date_creation',
+       'sold'
+       
        
        
    ];
