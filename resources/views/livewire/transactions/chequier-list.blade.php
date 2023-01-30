@@ -98,126 +98,89 @@
                                         <span class="userDatatable-title">id</span>
                                     </th>
                                     <th>
-                                        <span class="userDatatable-title">Nome de projet</span>
+                                        <span class="userDatatable-title">date de mise en disposition</span>
                                     </th>
                                     <th>
-                                        <span class="userDatatable-title">image</span>
+                                        <span class="userDatatable-title">numero de debut</span>
                                     </th>
                                     <th>
-                                        <span class="userDatatable-title">ville</span>
+                                        <span class="userDatatable-title">numero de fin</span>
+                                    </th>
+                                   
+                                    <th>
+                                        <span class="userDatatable-title">nombre de cheque</span>
+                                    </th>
+                                     <th>
+                                        <span class="userDatatable-title">Rip de compte</span>
                                     </th>
                                     <th>
-                                        <span class="userDatatable-title">adress</span>
+                                        <span class="userDatatable-title">Actions</span>
                                     </th>
-                                    <th>
-                                        <span class="userDatatable-title">consistance</span>
-                                    </th>
-                                    <th>
-                                        <span class="userDatatable-title">titre_finance</span>
-                                    </th>
-                                    <th>
-                                        <span class="userDatatable-title">autorisation</span>
-                                    </th>
-                                    <th>
-                                        <span class="userDatatable-title">superfice</span>
-                                    </th>
-                                    <th>
-                                        <span class="userDatatable-title">date de debut</span>
-                                    </th>
-                                    <th>
-                                        <span class="userDatatable-title">date de fin</span>
-                                    </th>
-                                    <th>
-                                        <span class="userDatatable-title float-right">Bureau</span>
-                                    </th>
-                                    <th>
-                                        <span class="userDatatable-title float-right">Caisse</span>
-                                    </th>
-                                    <th>
-                                        <span class="userDatatable-title float-right">Actions</span>
-                                    </th>
+                                   
                                 </tr>
                             </thead>
                             <tbody>
 
-                                {{-- @if ($projets->count() > 0)
+                                @if ($chequier->count() > 0)
 
-                                    @foreach ($projets as $projet)
+                                    @foreach ($chequier as $chequier)
                                         <tr>
                                             <td>
                                                 <div class="form-check">
-                                                   <input type="checkbox" wire:model="selectedProjects" value="{{ $projet->id }}" >
+                                                   <input type="checkbox" wire:model="selectedProjects" value="{{ $chequier->id}}" >
   
                                                   </div> 
                                             </td>
                                             <td>
                                                 <div class="orderDatatable-title">
-                                                    {{ $projet->id }}
+                                                    {{ $chequier->id }}
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="orderDatatable-title">
-                                                    {{ $projet->name }}
+                                                    {{ $chequier->dateDeMiseEnDisposition }}
                                                 </div>
                                             </td>
-                                            <td>
+                                           <td>
                                                 <div class="orderDatatable-title">
-                                                    <img src="{{ Storage::disk('local')->url($projet->image) }}"
-                                                        width="100" />
+                                                    {{ $chequier->numeroDeDebut }}
                                                 </div>
                                             </td>
-                                            <td>
-                                                <div class="orderDatatable-title">
-                                                    {{ $projet->ville }}
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="orderDatatable-title">
-                                                    {{ $projet->adress }}
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="orderDatatable-title">
-                                                    {{ $projet->consistance }}
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="orderDatatable-title">
-                                                    {{ $projet->titre_finance }}
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="orderDatatable-title">
-                                                    {{ $projet->autorisation }}
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="orderDatatable-title">
-                                                    {{ $projet->superfice }}
-                                                </div>
-                                            </td>
+                                             
 
                                             <td>
                                                 <div class="orderDatatable-title">
-                                                    {{ $projet->datedebut }}
+                                                    {{ $chequier->numeroDeFin }}
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="orderDatatable-title">
-                                                    {{ $projet->datefin }}
+                                                    {{ $chequier->nombreDeCheque }}
                                                 </div>
                                             </td>
+
+                                            @foreach($comptes as $compte)
+                                                @if($compte->id == $chequier->id_compte )
+                                                    <td>
+                                                <div class="orderDatatable-title">
+                                                    {{ $compte->numero }}
+                                                </div>
+                                            </td>
+                                                @endif
+                                            @endforeach
+                                            
+                                           
 
                                             <td>
                                                 <ul class="orderDatatable_actions mb-0 d-flex">
                                 
                                                     <li><a href="#" class="remove" data-toggle="modal"
                                                             data-target="#edit-modal"
-                                                            wire:click='editProject({{ $projet->id }})'><i
+                                                            wire:click='editProject({{ $chequier->id }})'><i
                                                                 class="fa-regular fa-pen-to-square"></i></a></li>
                                                     <li><a href="#" class="remove" data-toggle="modal"
                                                             data-target="#modal-info-delete"
-                                                            wire:click='deleteProject({{ $projet->id }})'
+                                                            wire:click='deleteProject({{ $chequier->id }})'
                                                             style="color: red;"><i class="fa-solid fa-trash"></i></a>
                                                     </li>
 
@@ -228,7 +191,7 @@
 
                                    
                                 @else
-                                @endif --}}
+                                @endif
 
                                 <!-- End: tr -->
 
@@ -246,7 +209,7 @@
                         <nav class="atbd-page ">
                             <ul class="atbd-pagination d-flex">
                                 <li class="atbd-pagination__item">
-                                      {{-- {{ $projets->links('vendor.livewire.bootstrap') }} --}}
+                                      {{-- {{ $chequier->links('vendor.livewire.bootstrap') }} --}}
                                 </li>
                                 <li class="atbd-pagination__item">
                                     <div class="paging-option">
@@ -282,7 +245,7 @@
                            <form  enctype="multipart/form-data">
                                 <div class="form-group mb-25">
 
-                                    <label>Importer des projets depuis un fichier xlxs</label>
+                                    <label>Importer des chequier depuis un fichier xlxs</label>
                                     <input class="form-control form-control-lg" type="file" name="exelFile"
                                         wire:model.defer='exelFile'>
                                     @error('exelFile')
@@ -358,6 +321,7 @@
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
+                                @if(count($comptes)>1)
                                  <div class="form-group mb-25">
                                     <label>Compte </label>  
                                    
@@ -371,6 +335,20 @@
                                     </select>
 
                                 </div>
+                                    @else
+                                       <label>Compte </label>  
+                                   
+                                    <select name="compte_id" wire:model.defer='compte_id'  class="form-control  form-control-lg">
+                                 
+                                   
+                                        <option value="{{$comptes->id}}">{{$comptes->numero}}</option>
+                                        
+                                 
+                                        
+                                    </select>
+
+                                @endif
+                                
               
                 <div class="modal-footer">
                     <button wire:click.prevent="saveData" class="btn btn-primary btn-sm">Enregistrer chequier</button>
@@ -379,7 +357,7 @@
             </div>
         </div>
     </div>
-
+</div>
 
 
 
@@ -396,7 +374,7 @@
 
 
 
-                    <h6 class="modal-title">Ajouter Nouveau Projet</h6>
+                    <h6 class="modal-title">Ajouter Nouveau chequier</h6>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span data-feather="x"></span></button>
                 </div>
@@ -405,7 +383,7 @@
                         <form wire:submit.prevent='editData'>
                             <div class="form-basic">
                                 <div class="form-group mb-25">
-                                    <label>Nom de projet</label>
+                                    <label>Nom de chequier</label>
                                     <input class="form-control form-control-lg" type="text" name="name"
                                         wire:model.defer='name'>
                                     @error('name')
@@ -488,7 +466,7 @@
  
               
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary btn-sm">Enregistrer projet</button>
+                    <button type="submit" class="btn btn-primary btn-sm">Enregistrer chequier</button>
                 </div>
                 </form>
             </div>
@@ -516,7 +494,7 @@
                         </div>
 
                         <div class="modal-info-text">
-                            <h6>Voulez-vous supprimer ce projet</h6>
+                            <h6>Voulez-vous supprimer ce chequier</h6>
                         </div>
 
                     </div>
