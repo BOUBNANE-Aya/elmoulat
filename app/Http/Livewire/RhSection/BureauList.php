@@ -1,17 +1,19 @@
 <?php
 
-namespace App\Http\Livewire\ConstantSection;
+namespace App\Http\Livewire\RhSection;
 
 use Livewire\Component;
-use App\Models\f_domaine;
+use App\Models\Bureau;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use \Illuminate\Database\QueryException;
-class DomaineList extends Component
+
+class BureauList extends Component
 {
+  
     use WithFileUploads;
     use WithPagination;
-    public $name,$id_domaine;
+    public $name,$ville,$phone,$id_bureau;
     public $selectRows = [];
     public $selectAll = false;
     public $bulkDisabled = true;
@@ -21,17 +23,21 @@ class DomaineList extends Component
     public function render()
     {
         $this->bulkDisabled = count($this->selectRows) < 1;
-        $domaines=f_domaine::all();
-        return view('livewire.constant-section.domaine-list',['domaines'=>$domaines]);
+        $bureaus=Bureau::all();
+        return view('livewire.rh-section.bureau-list',['bureaus'=>$bureaus]);
     }
     public function updated($fields){
         $this->validateOnly($fields,[
             'name'=>'required',
+            'ville'=>'required',
+            'phone'=>'required|integer',
         ]);
     }
     // this function for reset inputs
     public function resetInputs(){
         $this->name="";
+        $this->phone="";
+        $this->ville="";
     }
 
 
@@ -39,12 +45,17 @@ class DomaineList extends Component
     public function saveData(){
         $this->validate([
             'name'=>'required',
+            'ville'=>'required',
+            'phone'=>'required|integer',
            
         ]);
-        $domaine = new f_domaine;
-        $domaine->name = $this->name;     
-        $domaine->save();
-        session()->flash('message','domaine bien ajouter');
+        $bureau = new Bureau;
+        $bureau->nom = $this->name;     
+        $bureau->ville = $this->ville;     
+        $bureau->phone = $this->phone;     
+      
+        $bureau->save();
+        session()->flash('message','bureau bien ajouter');
         
         // for empty input fields after validation
          
@@ -59,18 +70,20 @@ class DomaineList extends Component
     }
     // edit data of a row 
     public function edit($id){
-        $domaine = f_domaine::where('id',$id)->first();
-        $this->id_domaine = $id;
-        $this->name = $domaine->name;
-       
-     
+        $bureau = Bureau::where('id',$id)->first();
+        $this->id_bureau = $id;
+        $this->name = $bureau->nom;
+        $this->ville = $bureau->ville;
+        $this->phone = $bureau->phone;
     }
     
     public function editData(){
-        $domaine = f_domaine::where('id',$this->id_domaine)->first();
-        $domaine->name = $this->name;
-        $domaine->save();
-        session()->flash('message','domaine bien modifer');
+        $bureau = Bureau::where('id',$this->id_bureau)->first();
+        $bureau->nom = $this->name;
+        $bureau->ville = $this->ville;
+        $bureau->phone = $this->phone;
+        $bureau->save();
+        session()->flash('message','bureau bien modifer');
         $this->dispatchBrowserEvent('close-model');
     }
    
@@ -78,20 +91,23 @@ class DomaineList extends Component
     // delete data row 
 
     public function delete($id){
-        $domaine = f_domaine::where('id',$id)->first();
-        $this->id_domaine = $id;
-        $this->name = $domaine->name;
+        $bureau = Bureau::where('id',$id)->first();
+        $this->id_bureau = $id;
+        $this->name = $bureau->nom;
+        $this->ville = $bureau->ville;
+        $this->phone = $bureau->phone;
+        
     }
     
     public function deleteData(){
        try{
-        $domaine = f_domaine::where('id',$this->id_domaine)->first();
-        $domaine->delete();
-        session()->flash('message','domaine bien supprimer');
+        $bureau = Bureau::where('id',$this->id_bureau)->first();
+        $bureau->delete();
+        session()->flash('message','bureau bien supprimer');
         $this->dispatchBrowserEvent('add');
         $this->dispatchBrowserEvent('close-model');
        }catch(QueryException $e){
-        session()->flash('error','le domaine used in fournisseur table');
+        session()->flash('error','error');
 
        }
         
@@ -100,13 +116,13 @@ class DomaineList extends Component
     // delete selected rows on the table 
     public function  deleteSelectedRows(){
         try{
-            f_domaine::query()
+            Bureau::query()
             ->whereIn('id',$this->selectRows)
             ->delete();
             $this->selectRows = [];
            $this->selectAll = false;
         }catch(QueryException $e){
-            session()->flash('error','le domaine used in fournisseur table');
+            session()->flash('error','error');
             
 
         }
@@ -116,14 +132,9 @@ class DomaineList extends Component
    
    public function updatedSelectAll($value){
    if($value){
-       $this->selectRows = f_domaine::pluck('id');
+       $this->selectRows = Bureau::pluck('id');
    }else{
        $this->selectRows = [];
    }
    }
-
-//    get domaine name 
-
-
-
 }

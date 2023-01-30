@@ -7,7 +7,7 @@
                     <div class="shop-breadcrumb">
     
                         <div class="breadcrumb-main">
-                            <h4 class="text-capitalize breadcrumb-title">Domaines</h4>
+                            <h4 class="text-capitalize breadcrumb-title">Bureaus</h4>
 
                        
                            
@@ -70,7 +70,13 @@
                                             <span class="userDatatable-title">id</span>
                                         </th>
                                         <th>
-                                            <span class="userDatatable-title">Nome de Domaine</span>
+                                            <span class="userDatatable-title">Nome de Bureau</span>
+                                        </th>
+                                        <th>
+                                            <span class="userDatatable-title">Ville de Bureau</span>
+                                        </th>
+                                        <th>
+                                            <span class="userDatatable-title">Phone number</span>
                                         </th>
                                        
                                         <th>
@@ -82,24 +88,34 @@
                                 </thead>
                                 <tbody>
     
-                                    @if ($domaines->count() > 0)
+                                    @if ($bureaus->count() > 0)
     
-                                        @foreach ($domaines as $domaine)
+                                        @foreach ($bureaus as $bureau)
                                             <tr>
                                                 <td>
                                             
-                                                    <input  type="checkbox" wire:model="selectRows" value="{{$domaine->id}}"  >
+                                                    <input  type="checkbox" wire:model="selectRows" value="{{$bureau->id}}"  >
                                                     
                                                 </td>
                                                
                                                 <td>
                                                     <div class="orderDatatable-title">
-                                                        {{ $domaine->id }}
+                                                        {{ $bureau->id }}
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="orderDatatable-title">
-                                                        {{ $domaine->name }}
+                                                        {{ $bureau->nom }}
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="orderDatatable-title">
+                                                        {{ $bureau->ville }}
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="orderDatatable-title">
+                                                        {{ $bureau->phone }}
                                                     </div>
                                                 </td>
                                                 
@@ -110,11 +126,11 @@
                                     
                                                         <li><a href="#" class="remove" data-toggle="modal"
                                                                 data-target="#edit-modal"
-                                                                wire:click='edit({{ $domaine->id }})'><i
+                                                                wire:click='edit({{ $bureau->id }})'><i
                                                                     class="fa-regular fa-pen-to-square"></i></a></li>
                                                         <li><a href="#" class="remove" data-toggle="modal"
                                                                 data-target="#modal-info-delete"
-                                                                wire:click='delete({{ $domaine->id }})'
+                                                                wire:click='delete({{ $bureau->id }})'
                                                                 style="color: red;"><i class="fa-solid fa-trash"></i></a>
                                                         </li>
     
@@ -188,7 +204,7 @@
     
     
     
-                        <h6 class="modal-title">Ajouter Nouveau domaine</h6>
+                        <h6 class="modal-title">Ajouter Nouveau Bureau </h6>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span data-feather="x"></span></button>
                     </div>
@@ -198,10 +214,28 @@
                             <form enctype="multipart/form-data">
                                 <div class="form-basic">
                                     <div class="form-group mb-25">
-                                        <label>Nom de Domaine</label>
+                                        <label>Nom de Bureau</label>
                                         <input class="form-control form-control-lg" type="text" name="name"
                                             wire:model.defer='name'>
                                         @error('name')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                        
+                                    </div>
+                                    <div class="form-group mb-25">
+                                        <label>ville</label>
+                                        <input class="form-control form-control-lg" type="text" name="ville"
+                                            wire:model.defer='ville'>
+                                        @error('ville')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                        
+                                    </div>
+                                    <div class="form-group mb-25">
+                                        <label>Phone</label>
+                                        <input class="form-control form-control-lg" type="number" name="phone"
+                                            wire:model.defer='phone'>
+                                        @error('phone')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                         
@@ -214,7 +248,7 @@
     
                     </div>
                     <div class="modal-footer">
-                        <button wire:click.prevent="saveData" class="btn btn-primary btn-sm">Enregistrer Domaine</button>
+                        <button wire:click.prevent="saveData" class="btn btn-primary btn-sm">Enregistrer Bureau</button>
                     </div>
                     </form>
                 </div>
@@ -255,6 +289,25 @@
                                         @enderror
                                         
                                     </div>
+
+                                    <div class="form-group mb-25">
+                                        <label>ville</label>
+                                        <input class="form-control form-control-lg" type="text" name="ville"
+                                            wire:model.defer='ville'>
+                                        @error('ville')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                        
+                                    </div>
+                                    <div class="form-group mb-25">
+                                        <label>Phone</label>
+                                        <input class="form-control form-control-lg" type="number" name="phone"
+                                            wire:model.defer='phone'>
+                                        @error('phone')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                        
+                                    </div>
                                    
                                 </div>
                                 
@@ -263,7 +316,7 @@
     
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary btn-sm" wire:click.prevent='editData()'> Save changes</button>
+                        <button type="button" class="btn btn-primary btn-sm" wire:click.prevent='editData()'> Save Bureau</button>
                     </div>
                     </form>
                 </div>
@@ -291,7 +344,7 @@
                             </div>
     
                             <div class="modal-info-text">
-                                <h6>Voulez-vous supprimer ce domaine</h6>
+                                <h6>Voulez-vous supprimer ce bureau</h6>
                             </div>
     
                         </div>
@@ -325,7 +378,7 @@
                         </div>
 
                         <div class="modal-info-text">
-                            <h6>Voulez-vous supprimer ce Domaine</h6>
+                            <h6>Voulez-vous supprimer ce bureau</h6>
                         </div>
 
                     </div>

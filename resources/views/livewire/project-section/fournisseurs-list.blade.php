@@ -152,7 +152,7 @@
                                                     </td>
                                                     <td>
                                                         <div class="orderDatatable-title">
-                                                            {{-- {{ $fournisseur->domaine->name}} --}}
+                                                            {{-- {{ $fournisseur->f_domaine->name}} --}}
                                                             
                                                         </div>
                                                     </td>
@@ -293,6 +293,9 @@
                                     @endforeach
                                         
                                     </select>
+                                    @error('id_fdomaine')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
 
                                 </div>
 
@@ -335,7 +338,7 @@
                         <form wire:submit.prevent='editData'>
                             <div class="form-basic">
                                 <div class="form-group mb-25">
-                                    <label>Nom de projet</label>
+                                    <label class="required">Nom </label>
                                     <input class="form-control form-control-lg" type="text" name="name" wire:model.defer='name'>
                                     @error('name')
                                     <span class="text-danger">{{$message}}</span>
@@ -343,13 +346,52 @@
                                     @enderror
                                 </div>
                                 <div class="form-group mb-25">
-                                    <label>Date de commencement</label>
-                                    <input class="form-control form-control-lg" type="date" wire:model.defer='date' name="date">
-                                    <div class="form-inline-action d-flex justify-content-between align-items-center">
-                                    </div>
-                                    @error('date')
+                                    <label>ICE</label>
+                                    <input class="form-control form-control-lg" type="text" name="ice" wire:model.defer='ice'>
+                                    @error('ice')
                                     <span class="text-danger">{{$message}}</span>
+
                                     @enderror
+                                </div>
+                                <div class="form-group mb-25">
+                                    <label>Phone</label>
+                                    <input class="form-control form-control-lg" type="text" name="phone" wire:model.defer='phone'>
+                                    @error('phone')
+                                    <span class="text-danger">{{$message}}</span>
+
+                                    @enderror
+                                </div>
+                                <div class="form-group mb-25">
+                                    <label>Adress</label>
+                                    <input class="form-control form-control-lg" type="text" name="adress" wire:model.defer='adress'>
+                                    @error('adress')
+                                    <span class="text-danger">{{$message}}</span>
+
+                                    @enderror
+                                </div>
+                                <div class="form-group mb-25">
+                                    <label>Email</label>
+                                    <input class="form-control form-control-lg" type="text" name="email" wire:model.defer='email'>
+                                    @error('email')
+                                    <span class="text-danger">{{$message}}</span>
+
+                                    @enderror
+                                </div>
+
+                                <div class="form-group mb-25">
+                                    <label>Domaine </label>
+                                    <select name="select-size-1" wire:model.defer='id_fdomaine' id="select-size-1" class="form-control  form-control-lg">
+                                        <option value="" selected>select an option</option>
+                                    @foreach($f_domaines as $f_domaine)
+                                        <option value="{{$f_domaine->id}}">{{$f_domaine->name}}</option>
+                                        
+                                    @endforeach
+                                        
+                                    </select>
+                                    @error('id_fdomaine')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+
                                 </div>
                             </div>
 

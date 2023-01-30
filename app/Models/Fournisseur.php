@@ -23,8 +23,8 @@ class Fournisseur extends Model
         'email',
         'adress',
     ];
-    // public function domaine(){
-    //     return $this->hasOne(f_domaine::class,"id");
+    // public function f_domaine(){
+    //     return $this->hasOne(f_domaine::class,'id');
     // }
 
 

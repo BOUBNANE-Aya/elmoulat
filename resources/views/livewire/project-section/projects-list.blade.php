@@ -436,7 +436,7 @@
                                 <select name="select-size-1" wire:model.defer='id_bureau' id="select-size-1" class="form-control  form-control-lg">
                                     <option value="" selected>select an option</option>
                                 @foreach($bureaus as $bureau)
-                                    <option value="{{$bureau->id}}">{{$bureau->name}}</option>
+                                    <option value="{{$bureau->id}}">{{$bureau->nom}}</option>
                                     
                                 @endforeach
                                     
