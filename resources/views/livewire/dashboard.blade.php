@@ -159,17 +159,17 @@
 
        
        @if($currentTab === 'projet')
-       <livewire:projects-list>
+       <livewire:project-section.projects-list>
         
        @endif
        @if($currentTab === 'fournisseurs')
-       <livewire:fournisseurs-list>
+       <livewire:project-section.fournisseurs-list>
         
         
         
        @endif
        @if($currentTab === 'ouvriers')
-       <livewire:ouvriers-list>
+       <livewire:project-section.ouvriers-list>
         
        @endif
        

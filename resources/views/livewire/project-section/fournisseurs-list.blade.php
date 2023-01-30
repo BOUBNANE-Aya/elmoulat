@@ -60,30 +60,34 @@
 
         @endif
         <div class="container-fluid">
+            <button type="button" class=" btn btn-sm btn-danger btn-add  " @if($bulkDisabled) disabled @endif data-target="#modal-all-delete" data-toggle="modal" >
+                                          
+                <i class="la la-trash"></i>delete selected</button>
             <div class="row">
+                
                 <div class="col-lg-12">
                     <div class="userDatatable orderDatatable shipped-dataTable global-shadow border p-30 bg-white radius-xl w-100 mb-30">
                         <div class="table-responsive">
-                            @if($fournisseurs->count() > 0)
+                          
                             <table class="table mb-0 table-borderless border-0">
                                 <thead>
                                     <tr class="userDatatable-header">
+                                        
                                         <th>
-                                            <div class="d-flex align-items-center">
-
-
-
-                                            </div>
+                                            <input type="checkbox" wire:model="selectAll">
                                         </th>
-
+                                        
                                         <th>
-                                            <span class="userDatatable-title">Nom</span>
+                                            <span class="userDatatable-title">id</span>
                                         </th>
                                         <th>
-                                            <span class="userDatatable-title">ICE</span>
+                                            <span class="userDatatable-title">Nom de Fournisseur</span>
                                         </th>
                                         <th>
-                                            <span class="userDatatable-title">Phone</span>
+                                            <span class="userDatatable-title">Ice </span>
+                                        </th>
+                                        <th>
+                                            <span class="userDatatable-title">phone</span>
                                         </th>
                                         <th>
                                             <span class="userDatatable-title">Email</span>
@@ -91,98 +95,100 @@
                                         <th>
                                             <span class="userDatatable-title">Adress</span>
                                         </th>
-                                         <th>
-                                            <span class="userDatatable-title">f_doamine</span>
-                                        </th>
                                         <th>
-                                            <span class="userDatatable-title float-right">Actions</span>
+                                            <span class="userDatatable-title">Domaine</span>
+                                        </th> 
+                                        <th>
+                                            <span class="userDatatable-title">Actions</span>
                                         </th>
+                                       
+                                        
                                     </tr>
                                 </thead>
                                 <tbody>
-
-
-
-                                    @foreach($fournisseurs as $fournisseur)
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex align-items-center">
-                                                <div class=" userDatatable__imgWrapper d-flex align-items-center">
-                                                    <div class="checkbox-group-wrapper">
-                                                        <div class="checkbox-group d-flex">
-                                                            <div class="checkbox-theme-default custom-checkbox checkbox-group__single d-flex">
-                                                                <input class="checkbox" type="checkbox" id="check-grp-12">
-                                                                <label for="check-grp-12">
-                                                                </label>
-                                                            </div>
+    
+                                    @if ($fournisseurs->count() > 0)
+        
+                                            @foreach ($fournisseurs as $fournisseur)
+                                                <tr>
+                                                    <td>
+                                                
+                                                        <input  type="checkbox" wire:model="selectedfournisseur" value="{{$fournisseur->id}}"  >
+                                                        
+                                                    </td>
+                                                   
+                                                    <td>
+                                                        <div class="orderDatatable-title">
+                                                            {{ $fournisseur->id }}
                                                         </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </td>
-
-                                        <td>
-                                            <div class="orderDatatable-title">
-                                                {{$fournisseur->nom}}
-                                            </div>
-                                        </td>
-
-                                        <td>
-                                            <div class="orderDatatable-title">
-                                                {{$fournisseur->ice}}
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="orderDatatable-title">
-                                                {{$fournisseur->phone}}
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="orderDatatable-title">
-                                                {{$fournisseur->email}}
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="orderDatatable-title">
-                                                {{$fournisseur->adress}}
-                                            </div>
-                                        </td>
-                                     
-                                            <td>
-                                            <div class="orderDatatable-title">
-                                                {{-- {{$fournisseur->fdomaine->name}} --}}
-                                            </div>
-                                        </td>
-                                      
+                                                    </td>
+                                                    <td>
+                                                        <div class="orderDatatable-title">
+                                                            {{ $fournisseur->nom }}
+                                                        </div>
+                                                    </td>
+                                                    
+                                                    <td>
+                                                        <div class="orderDatatable-title">
+                                                            {{ $fournisseur->ice }}
+                                                        </div>
+                                                    </td>
+                                                    
+                                                    
+                                                    <td>
+                                                        <div class="orderDatatable-title">
+                                                            {{ $fournisseur->phone }}
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="orderDatatable-title">
+                                                            {{ $fournisseur->email }}
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="orderDatatable-title">
+                                                            {{ $fournisseur->adress }}
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="orderDatatable-title">
+                                                            {{-- {{ $fournisseur->fdomaine->name}} --}}
+                                                        </div>
+                                                    </td>
+                                                   
+        
+                                                   
+                                                    <td>
+                                                        <ul class="orderDatatable_actions mb-0 d-flex">
                                         
-
-                                        <td>
-                                            <ul class="orderDatatable_actions mb-0 d-flex">
-
-                                                <li><a class="remove" data-toggle="modal" data-target="#edit-modal" wire:click='editProject({{$fournisseur->id}})'><i class="fa-regular fa-pen-to-square"></i></a></li>
-                                                <li><a class="remove" data-toggle="modal" data-target="#modal-info-delete" wire:click='deleteProject({{$fournisseur->id}})' style="color: red;"><i class="fa-solid fa-trash"></i></a></li>
-
-                                            </ul>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-
-
+                                                            <li><a href="#" class="remove" data-toggle="modal"
+                                                                    data-target="#edit-modal"
+                                                                    wire:click='editFournisseur({{ $fournisseur->id }})'><i
+                                                                        class="fa-regular fa-pen-to-square"></i></a></li>
+                                                            <li><a href="#" class="remove" data-toggle="modal"
+                                                                    data-target="#modal-info-delete"
+                                                                    wire:click='deleteFournisseur({{ $fournisseur->id }})'
+                                                                    style="color: red;"><i class="fa-solid fa-trash"></i></a>
+                                                            </li>
+        
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @else
+                                        @endif
+    
                                     <!-- End: tr -->
-
-
-
-
-
-
-
+    
+    
+    
+    
+    
+    
+    
                                 </tbody>
                             </table><!-- End: table -->
-                            @else
-
-                            <h1>no data </h1>
-                            @endif
+                        
                         </div>
                         <div class="d-flex justify-content-sm-end justify-content-start mt-15 pt-25 border-top">
 
