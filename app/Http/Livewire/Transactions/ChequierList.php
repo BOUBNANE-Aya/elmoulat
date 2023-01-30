@@ -40,6 +40,16 @@ class ChequierList extends Component
        $this->dispatchBrowserEvent('close-model');
 
     }
+
+    public function deleteChequier($id){
+        $chequier = Chequier::where('id',$id)->get();
+        $deleted = $chequier->delete();
+        if($deleted){
+            session()->flash('success','Chequier bien supprimer');
+            $this->dispatchBrowserEvent('add');
+            $this->dispatchBrowserEvent('close-model');
+        }
+    }
     public function render()
     { 
         $comptes = Compte::all();

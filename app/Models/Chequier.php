@@ -18,7 +18,7 @@ class Chequier extends Model
        
        
     ];
-    public function compte($id){
-        return $this->hasOne(Compte::class,$id);
+    public function compte(){
+        return $this->belongsTo(Compte::class,'id_compte');
     }
 }

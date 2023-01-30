@@ -159,7 +159,7 @@
                                                 </div>
                                             </td>
 
-                                            @foreach($comptes as $compte)
+                                            {{-- @foreach($comptes as $compte)
                                                 @if($compte->id == $chequier->id_compte )
                                                     <td>
                                                 <div class="orderDatatable-title">
@@ -167,20 +167,23 @@
                                                 </div>
                                             </td>
                                                 @endif
-                                            @endforeach
-                                            
-                                           
+                                            @endforeach --}}
+                                            <td>
+                                            <div class="orderDatatable-title">
+                                                {{ $chequier->compte->numero }}
+                                            </div>
+                                        </td>
 
                                             <td>
                                                 <ul class="orderDatatable_actions mb-0 d-flex">
                                 
                                                     <li><a href="#" class="remove" data-toggle="modal"
                                                             data-target="#edit-modal"
-                                                            wire:click='editProject({{ $chequier->id }})'><i
+                                                            wire:click='editChequier({{ $chequier->id }})'><i
                                                                 class="fa-regular fa-pen-to-square"></i></a></li>
                                                     <li><a href="#" class="remove" data-toggle="modal"
                                                             data-target="#modal-info-delete"
-                                                            wire:click='deleteProject({{ $chequier->id }})'
+                                                            wire:click='deleteChequier({{ $chequier->id }})'
                                                             style="color: red;"><i class="fa-solid fa-trash"></i></a>
                                                     </li>
 
@@ -230,51 +233,7 @@
             </div><!-- End: .col -->
         </div>
     </div>
-{{-- import modal start --}}
-<div wire:ignore.self class="modal-info-delete modal fade show" id="modal-import" tabindex="-1"
-        role="dialog" aria-hidden="true">
 
-
-        <div class="modal-dialog modal-dialog-centered modal-info" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="modal-info-body d-flex">
-                        <div class="modal-info-icon warning">
-                            <span data-feather="info"></span>
-                        </div>
-                           <form  enctype="multipart/form-data">
-                                <div class="form-group mb-25">
-
-                                    <label>Importer des chequier depuis un fichier xlxs</label>
-                                    <input class="form-control form-control-lg" type="file" name="exelFile"
-                                        wire:model.defer='exelFile'>
-                                    @error('exelFile')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                 
-                                </div>
-                              
-                    </div>
-                </div>
-                <div class="modal-footer">
-
-                    <button type="button" class="btn btn-danger btn-outlined btn-sm"
-                        data-dismiss="modal">Annuler</button>
-                    <button type="submit" wire:click.prevent='importData' class="btn btn-success btn-outlined btn-sm" >importer</button>
-
-                </div>
-                </form>
-            </div>
-        </div>
-
-
-    </div>
-
-
-
-
-      
-{{-- import modal end --}}
 
     {{-- add project  modal --}}
     <div wire:ignore.self class="modal-basic modal fade show" id="modal-basic" tabindex="-1" role="dialog"
@@ -321,7 +280,7 @@
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
-                                @if(count($comptes)>1)
+                                @if(count($comptes)>0)
                                  <div class="form-group mb-25">
                                     <label>Compte </label>  
                                    
@@ -338,14 +297,6 @@
                                     @else
                                        <label>Compte </label>  
                                    
-                                    <select name="compte_id" wire:model.defer='compte_id'  class="form-control  form-control-lg">
-                                 
-                                   
-                                        <option value="{{$comptes->id}}">{{$comptes->numero}}</option>
-                                        
-                                 
-                                        
-                                    </select>
 
                                 @endif
                                 
@@ -357,7 +308,7 @@
             </div>
         </div>
     </div>
-</div>
+
 
 
 
@@ -522,5 +473,3 @@
 </div>
 </div>
 
-
-</div>

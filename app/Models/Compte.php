@@ -26,4 +26,6 @@ class Compte extends Model
    ];
 
    
+
+   
 }
