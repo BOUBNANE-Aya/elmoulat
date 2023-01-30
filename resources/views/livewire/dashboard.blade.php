@@ -177,6 +177,10 @@
        <livewire:client-list>
         
        @endif
+        @if($currentTab === 'chequier')
+       <livewire:transactions.chequier-list>
+        
+       @endif
        
        
        </div>
