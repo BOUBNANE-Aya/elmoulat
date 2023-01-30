@@ -4,9 +4,10 @@ namespace App\Http\Livewire;
 use App\Imports\ProjetsImport;
 use Livewire\Component;
 use App\Models\Projet;
-use Livewire\WithFileUploads;
+
 use Maatwebsite\Excel\Facades\Excel;
 use Livewire\WithPagination;
+use Livewire\WithFileUploads;
 
 class ProjectsList extends Component
 {
