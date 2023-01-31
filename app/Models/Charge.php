@@ -17,7 +17,7 @@ class Charge extends Model
    protected $fillable = [
        
        'fournisseur_id',
-       'projet_id',
+       'id_projet',
        'name',
        'type',
        'bon',
@@ -31,13 +31,24 @@ class Charge extends Model
 
 
     public function projet(){
-    return $this->belongsTo('App\Models\Projet');
+    // return $this->belongsTo('App\Models\Projet','projet_id');
+    return $this->belongsTo(Projet::class,'id_projet');
+
    }
 
     public function fournisseur(){
-    return $this->belongsTo('App\Models\Fournisseur');
+    return $this->belongsTo('App\Models\Fournisseur', 'fournisseur_id');
    }
 
+
+
+
+
+
+
+   public function reglememt(){
+    return $this->belongsTo('App\Models\Reglement');
+   }
 
 
 }

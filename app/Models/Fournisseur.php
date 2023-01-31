@@ -23,7 +23,7 @@ class Fournisseur extends Model
         'adress',
     ];
     public function domaine(){
-        
+        return $this->belongsTo(f_domaine::class,'id_fdomaine');
     }
 
     public function charge(){

@@ -80,8 +80,6 @@
                                       
                                              <div class="form-check">
                                                <input  type="checkbox" wire:model="selectAll" >
-                                            
-  
                                                 </div>
          
                                        

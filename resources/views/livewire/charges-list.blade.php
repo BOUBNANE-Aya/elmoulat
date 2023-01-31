@@ -79,8 +79,6 @@
     
                                                 <div class="form-check">
                                                     <input type="checkbox" wire:model="selectAll">
-    
-    
                                                 </div>
     
     
@@ -136,7 +134,6 @@
                                                 <div class="form-check">
                                                     <input type="checkbox" wire:model="selectedCharges"
                                                         value="{{ $CH->id }}">
-    
                                                 </div>
                                             </td>
                                             <td>
@@ -187,19 +184,34 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="orderDatatable-title">
+                                                    @if($CH->situation === 'payed')
+                                                    <div class="orderDatatable-title" style="color: green">
                                                     {{ $CH->situation }}
+                                                    </div>
+                                                    @endif
+                                                    @if ($CH->situation === 'notPayed')
+                                                        <div class="orderDatatable-title" style="color: red">
+                                                        {{ $CH->situation }}
+                                                        </div>                                                     
+                                                    @endIf
+                                                    
+                                            </td>
+                                            <td>
+                                                <div class="orderDatatable-title">
+                                                    {{ $CH->projet->name }}
+                                                    {{-- @foreach ($projets as $p)
+                                                        @if ($p->id == $CH->projet_id )
+                                                            {{ $p->id }}
+                                                        @endif
+                                                        @break
+                                                    @endforeach --}}
+                                                  
                                                 </div>
                                             </td>
                                             <td>
-                                                {{-- <div class="orderDatatable-title">
-                                                    {{ $CH->projet()->name }}
-                                                </div> --}}
-                                            </td>
-                                            <td>
-                                                {{-- <div class="orderDatatable-title">
-                                                    {{ $CH->Fournisseur()->name }}
-                                                </div> --}}
+                                                <div class="orderDatatable-title">
+                                                    {{ $CH->fournisseur->name }}
+                                                </div>
                                             </td>
                                             <td>
                                                 <ul class="orderDatatable_actions mb-0 d-flex">
@@ -535,24 +547,10 @@
     
             </div>
     
+            {{-- CREE REGLEMENT model --}}
 
-
-
-
-{{-- 
-            <div wire:ignore.self class="modal-basic modal fade show" id="modal-basic" tabindex="-1" role="dialog"
-                aria-hidden="true">
-    
-    
-                <div class="modal-dialog modal-md" role="document">
-                    <div class="modal-content modal-bg-white ">
-                        <div class="modal-header"> --}}
-    
-            {{-- Add Reglement Model--}}
             <div wire:ignore.self class="modal-basic modal fade show" id="cree-reglement" tabindex="-1" role="dialog"
             aria-hidden="true">
-
-
             <div class="modal-dialog modal-md" role="document">
                 <div class="modal-content modal-bg-white ">
                     <div class="modal-header">
@@ -564,33 +562,72 @@
 
                             <form enctype="multipart/form-data">
                                 <div class="form-basic">
-                                    <div class="form-group mb-25">
-                                        <input class="radio" name="method" type="radio">
-                                        <label>
-                                            <span class="radio-text">Check</span>
-                                        </label>
-                                        <input class="radio" name="method" type="radio">
-                                        <label>
-                                            <span class="radio-text">Cash</span>
-                                        </label>
-                                </div>
-                                 
-                                  
-                                   
-                                    {{-- <div class="form-group mb-25">
-                                        <label>prix_ht</label>
-                                        <input class="form-control form-control-lg" type="text" name="prix_ht"
-                                            wire:model.defer='prix_ht'>
-                                        @error('prix_ht')
-                                        <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div> --}}
-                                  
+
+                                       <div class="form-group mb-25">
+                                            <label>Date</label><small>date actuelle</small>
+                                            <input class="form-control form-control-lg" type="date" name="date" 
+                                                wire:model.defer='date'>
+                                            @error('date')
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+
+
+                                        <div class="form-group mb-25">
+                                            <label>Montant Total</label>
+                                            <input class="form-control form-control-lg" type="text" placeholder="0000.00 DH" name="montant"
+                                                wire:model.defer='montant'>
+                                            @error('montant')
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group mb-25">
+                                            <input class="radio" wire:click='optionCheque' type="checkbox">
+                                            <label>
+                                                <span class="radio-text">Avec chèque</span>
+                                            </label>
+                                        </div>
+                                        
+                                        @if ($optionC)
+                                            <div class="form-group mb-25">
+                                                <label>Numéro du chèque</label>
+                                                <input class="form-control form-control-lg" placeholder="000-00000-000" type="text" name="numero_cheque"
+                                                wire:model.defer='numero_cheque'>
+                                                @error('numero_cheque')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        @endIf
+
+
+
+
+                                        <div class="form-group mb-25">
+                                            <input class="radio" wire:click='avecFacture' type="checkbox">
+                                            <label>
+                                                <span class="radio-text">Avec Facture</span>
+                                            </label>
+                                        </div>
+                                        
+                                        @if ($avecF)
+                                        {{-- <h1>hello</h1> --}}
+                                            <div class="form-group mb-25">
+                                                <label>Numéro du Facture</label>
+                                                <input class="form-control form-control-lg" type="text" name="numFacture"
+                                                wire:model.defer='numFacture'>
+                                                @error('numFacture')
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                            </div>
+                                        @endIf
+
+
+
                                     
+                                    </div>
                                 </div>
-                        </div>
                         <div class="modal-footer">
-                            <button wire:click.prevent="saveCharge" type="submit" class="btn btn-primary btn-sm">Enregistrer le règlement</button>
+                            <button wire:click.prevent="addReg" type="submit" class="btn btn-primary btn-sm">Enregistrer le règlement</button>
                         </div>
                         </form>
                     </div>

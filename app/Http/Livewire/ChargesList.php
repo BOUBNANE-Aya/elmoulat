@@ -6,6 +6,8 @@ use Livewire\Component;
 use App\Models\Charge;
 use App\Models\Projet;
 use App\Models\Fournisseur;
+use App\Models\Reglement;
+use App\Models\Facture;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 class ChargesList extends Component
@@ -13,26 +15,111 @@ class ChargesList extends Component
     use WithFileUpLoads;
     use WithPagination;
 
-    public $id_Charge, $name, $fournisseur_id, $projet_id, $type, 
+    public $id_Charge, $name, $fournisseur_id, $id_projet, $type, 
     $bon, $prix_ht, $tva, $QT,$prix_TTC, $MTTTC, $situation;
     public $selectedOption;
-    // public $charges, $charge;
     public $pages = 10;
     public $bulkDisabled = true;
     public $selectedCharges = [];
     public $selectAll = false;
 
-    public function render()
-    {
+    // reglement 
+    public $montant, $date, $methode, $numero_cheque, $id_facture;
+    public $numFacture;
+    // Method check or Cash
+    
+
+
+  
+
+    public function render(){
         $this->bulkDisabled = count($this->selectedCharges) < 1;
         $charges = Charge::orderBy('id', 'DESC')->paginate($this->pages);
 
         $fournisseurs = Fournisseur::all();
         $projets = Projet::all();
 
+        // $p = Projet::where('id',$charges[0]->id)->first();
+        // dd($p->name);
         return view('livewire.charges-list',['charges'=>$charges, 'fournisseurs'=>$fournisseurs, 'projets'=>$projets]);
     }
 
+
+    // REGLEMENTS 
+
+    // method cheque ou non cheque
+    public $optionC = false;
+    public function optionCheque(){  
+        if($this->optionC){
+            $this->optionC = false;
+        }else{
+            $this->optionC = true;
+        }
+    }
+
+    public $avecF = false;
+    public function avecFacture(){
+        if($this->avecF){
+            $this->avecF = false;
+        }else{
+            $this->avecF = true;
+        }
+
+    }
+
+    // REGLEMENT CRUD
+    public function addReg(){
+
+        // check whether the reglement has check or facture , otherwise you ll get a SQL Logic error 
+        // if(is_null($this->numero_cheque)){
+        //     $this->numero_cheque = '';
+        // }
+        if(!(is_null($this->numFacture))){
+            $facture = Facture::where('numero', $this->numFacture)->get();
+
+            // dd($facture[0]->id);
+
+            $this->id_facture = $facture[0]->id;
+        }
+        
+        // this if statement is for filling the method col of the reglement table whether it's a check method or a cash method 
+        if($this->optionC){
+        $this->methode = 'cheque';
+        }
+        else {
+        $this->methode = 'cash';
+        }
+        $this->validate([
+            'date' => 'required',
+            'montant' => 'required',
+        ]);
+        // dd($this->numero_cheque);
+        $reglement = Reglement::create([
+            'date' =>$this->date,
+            'montant' => $this->montant,
+            'methode' => $this->methode,
+            'numero_cheque' => $this->numero_cheque,
+            'id_facture' => $this->id_facture,
+            'id_contrat' => null,
+            ]);
+        session()->flash('message', 'Reglement added successfully');
+        $this->resetInputs();
+        $this->dispatchBrowserEvent('close-model');
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    // CHARGE CRUD
 
     public function editCharge($id){
         $charge = Charge::where('id',$id)->first();
@@ -46,7 +133,7 @@ class ChargesList extends Component
         $this->prix_TTC = $charge->prix_TTC ;
         $this->MTTTC  = $charge->MTTTC;
         $this->situation = $charge->situation;
-        $this->projet_id = $charge->projet_id;
+        $this->id_projet = $charge->id_projet;
         $this->fournisseur_id = $charge->fournisseur_id;
     }
 
@@ -61,7 +148,7 @@ class ChargesList extends Component
         $charge->prix_TTC = $this->prix_TTC;
         $charge->MTTTC = $this->MTTTC;
         $charge->situation = $this->situation;
-        $charge->projet_id  = $this->projet_id ;
+        $charge->id_projet  = $this->projet_id ;
         $charge->fournisseur_id  = $this->fournisseur_id ;
         $charge->save();
         session()->flash('message','Charge bien modifer');
@@ -82,22 +169,22 @@ class ChargesList extends Component
     }
 
 
-
-
-
-
     public function  deleteSelected(){
-        // Projet::query()
-        //     ->whereIn('id',$this->selectedCharges)
-        //     ->delete();
-    
-        // $this->selectedCharges = [];
-        // $this->selectAll = false;
+
+        // if($this->selectAll){
+        //     foreach(){
+
+        //     }
+        //     array_push($this->selectedCharges, );
+        // }
+        Charge::query()
+            ->whereIn('id',$this->selectedCharges)
+            ->delete();
+        
+        $this->selectedCharges = [];
+        $this->selectAll = false;
         
     }
-
-
-
 
     public function saveCharge(){
         $this->validation();
@@ -120,9 +207,6 @@ class ChargesList extends Component
         $this->dispatchBrowserEvent('close-model');
     }
 
-
-
-
     public function resetInputs(){
         
         $this->name = "";
@@ -135,8 +219,9 @@ class ChargesList extends Component
         $this->prix_TTC = "";
         $this->MTTTC = "";
 }
-public function validation(){
-    $this->validate([
+
+    public function validation(){
+        $this->validate([
         'name'=>'required',
         'situation' => 'required',
         'type'=>'required',
