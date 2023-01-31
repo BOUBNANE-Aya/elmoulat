@@ -178,6 +178,10 @@
         
        @endif
        
+       @if($currentTab === 'charges')
+       <livewire:charges-list>
+        
+       @endif
        
        </div>
 </div>
