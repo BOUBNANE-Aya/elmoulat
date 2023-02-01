@@ -39,8 +39,6 @@ class ChargesList extends Component
         $fournisseurs = Fournisseur::all();
         $projets = Projet::all();
 
-        // $p = Projet::where('id',$charges[0]->id)->first();
-        // dd($p->name);
         return view('livewire.charges-list',['charges'=>$charges, 'fournisseurs'=>$fournisseurs, 'projets'=>$projets]);
     }
 
@@ -70,15 +68,8 @@ class ChargesList extends Component
     // REGLEMENT CRUD
     public function addReg(){
 
-        // check whether the reglement has check or facture , otherwise you ll get a SQL Logic error 
-        // if(is_null($this->numero_cheque)){
-        //     $this->numero_cheque = '';
-        // }
         if(!(is_null($this->numFacture))){
             $facture = Facture::where('numero', $this->numFacture)->get();
-
-            // dd($facture[0]->id);
-
             $this->id_facture = $facture[0]->id;
         }
         
@@ -93,7 +84,6 @@ class ChargesList extends Component
             'date' => 'required',
             'montant' => 'required',
         ]);
-        // dd($this->numero_cheque);
         $reglement = Reglement::create([
             'date' =>$this->date,
             'montant' => $this->montant,
@@ -104,12 +94,23 @@ class ChargesList extends Component
             ]);
         session()->flash('message', 'Reglement added successfully');
         $this->resetInputs();
+
+        $this->updateChargeAfterReg();
         $this->dispatchBrowserEvent('close-model');
+
+
+
 
     }
 
 
-
+    public function updateChargeAfterReg(){
+        foreach($this->selectedCharges as $ch){
+            Charge::where('id',$ch)->update(['situation'=> 'payed']);
+        }
+        $this->selectedCharges = [];
+        $this->selectAll = false;
+    }
 
 
 
@@ -132,7 +133,6 @@ class ChargesList extends Component
         $this->QT = $charge->QT ;
         $this->prix_TTC = $charge->prix_TTC ;
         $this->MTTTC  = $charge->MTTTC;
-        $this->situation = $charge->situation;
         $this->id_projet = $charge->id_projet;
         $this->fournisseur_id = $charge->fournisseur_id;
     }
@@ -147,8 +147,7 @@ class ChargesList extends Component
         $charge->QT = $this->QT;
         $charge->prix_TTC = $this->prix_TTC;
         $charge->MTTTC = $this->MTTTC;
-        $charge->situation = $this->situation;
-        $charge->id_projet  = $this->projet_id ;
+        $charge->id_projet  = $this->id_projet ;
         $charge->fournisseur_id  = $this->fournisseur_id ;
         $charge->save();
         session()->flash('message','Charge bien modifer');
@@ -171,12 +170,6 @@ class ChargesList extends Component
 
     public function  deleteSelected(){
 
-        // if($this->selectAll){
-        //     foreach(){
-
-        //     }
-        //     array_push($this->selectedCharges, );
-        // }
         Charge::query()
             ->whereIn('id',$this->selectedCharges)
             ->delete();
@@ -198,7 +191,7 @@ class ChargesList extends Component
             'prix_TTC' => $this->prix_TTC,
             'MTTTC' => $this->MTTTC,
             'situation' => $this->situation,
-            'projet_id' => $this->projet_id,
+            'id_projet' => $this->id_projet,
             'fournisseur_id' => $this->fournisseur_id
         ]);
 
@@ -210,7 +203,6 @@ class ChargesList extends Component
     public function resetInputs(){
         
         $this->name = "";
-        $this->situation = "";
         $this->type = "" ;
         $this->bon  = "";
         $this->prix_ht = "";
@@ -223,7 +215,6 @@ class ChargesList extends Component
     public function validation(){
         $this->validate([
         'name'=>'required',
-        'situation' => 'required',
         'type'=>'required',
         'bon'=>'required',
         'prix_ht'=>'required',
@@ -234,5 +225,16 @@ class ChargesList extends Component
    ]);
 
 }
+
+
+public function updatedSelectAll($value){
+    if($value){
+        $this->selectedCharges = Charge::pluck('id');
+    }else{
+        $this->selectedCharges = [];
+    }
+ }
+
+
 
 }

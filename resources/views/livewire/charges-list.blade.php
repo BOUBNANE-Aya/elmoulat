@@ -40,11 +40,13 @@
                                             <i class="la la-plus"></i>Ajouter</button>
     
                                     </div>
+                                    @if($charges->count() > 0)
                                     <div class="action-btn">
                                         <button type="button" class="btn btn-sm btn-primary btn-add" data-toggle="modal" data-target="#cree-reglement" >
                                             <i class="la la-plus"></i> Créer un Règlement
                                         </button>
                                     </div>
+                                    @endif
                                 </div>
                             </div>
     
@@ -59,6 +61,8 @@
     
             </div>
             @endif
+
+            @if($charges->count()>0)
             <div class="container-fluid">
                 <div class="action-btn mb-3">
                     <button type="button" class="@if($bulkDisabled) disabled @endif btn btn-sm btn-danger"
@@ -185,13 +189,13 @@
                                             </td>
                                             <td>
                                                     @if($CH->situation === 'payed')
-                                                    <div class="orderDatatable-title" style="color: green">
-                                                    {{ $CH->situation }}
+                                                    <div class="orderDatatable-title">
+                                                        <span class="badge rounded-pill bg-success">{{ $CH->situation }}</span>
                                                     </div>
                                                     @endif
                                                     @if ($CH->situation === 'notPayed')
-                                                        <div class="orderDatatable-title" style="color: red">
-                                                        {{ $CH->situation }}
+                                                        <div class="orderDatatable-title">
+                                                            <span class="badge rounded-pill bg-danger">{{ $CH->situation }}</span>
                                                         </div>                                                     
                                                     @endIf
                                                     
@@ -199,12 +203,6 @@
                                             <td>
                                                 <div class="orderDatatable-title">
                                                     {{ $CH->projet->name }}
-                                                    {{-- @foreach ($projets as $p)
-                                                        @if ($p->id == $CH->projet_id )
-                                                            {{ $p->id }}
-                                                        @endif
-                                                        @break
-                                                    @endforeach --}}
                                                   
                                                 </div>
                                             </td>
@@ -263,6 +261,9 @@
                     </div><!-- End: .col -->
                 </div>
             </div>
+            @else
+                <h3>No Charges</h3>
+            @endif
     
     
     
@@ -347,17 +348,36 @@
                                             <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
+                                    
                                         <div class="form-group mb-25">
-                                            <label>Situation</label>
-                                            <input class="form-control form-control-lg" type="text" name="situation"
-                                                wire:model.defer='situation'>
-                                            @error('situation')
-                                            <span class="text-danger">{{ $message }}</span>
-                                            @enderror
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="situation" value="notPayed" wire:model.defer='situation' checked>
+                                            <label class="form-check-label">
+                                                impayé
+                                            </label>
+                                          </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" value="payed" wire:model.defer='situation' name="situation" >
+                                            <label class="form-check-label" >
+                                                payé
+                                            </label>
+                                          </div>
                                         </div>
+
+
+
+                                        <select class="selectpicker" data-live-search="true">
+                                            <option data-tokens="ketchup mustard">Hot Dog, Fries and a Soda</option>
+                                            <option data-tokens="mustard">Burger, Shake and a Smile</option>
+                                            <option data-tokens="frosting">Sugar, Spice and all things nice</option>
+                                          </select>
+                                          
+
+
+
                                         <div class="form-group mb-25 ">
                                             <label>Projet</label>
-                                                <select name="projet_id"  id="select-size-1" wire:model.defer='projet_id' class="form-control  form-control-lg">
+                                                <select name="id_projet"  id="select-size-1" wire:model.defer='id_projet' class="form-control  form-control-lg">
                                                     @foreach($projets as $p)
                                                     <option value="{{$p->id}}">{{$p->name}}</option>
                                                     @endforeach
@@ -468,17 +488,10 @@
                                             <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
-                                        <div class="form-group mb-25">
-                                            <label>Situation</label>
-                                            <input class="form-control form-control-lg" type="text" name="situation"
-                                                wire:model.defer='situation'>
-                                            @error('situation')
-                                            <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
+                                       
                                         <div class="form-group mb-25 ">
                                             <label>Projet</label>
-                                                <select name="projet_id"  id="select-size-1" wire:model.defer='projet_id' class="form-control  form-control-lg">
+                                                <select name="id_projet"  id="select-size-1" wire:model.defer='id_projet' class="form-control  form-control-lg">
                                                     @foreach($projets as $p)
                                                     <option value="{{$p->id}}">{{$p->name}}</option>
                                                     @endforeach
